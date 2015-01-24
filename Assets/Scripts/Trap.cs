@@ -27,7 +27,7 @@ public class Trap : MonoBehaviour {
         {
             collider.gameObject.GetComponent<Playermovement>().isFalling = true;
            // collider.gameObject.GetComponent<Animator>().active = false;
-            collider.gameObject.GetComponent<Playermovement>().fallingIn = this;
+            collider.gameObject.GetComponent<Playermovement>().fallingIn = this.transform.position;
         }
     }
 }

@@ -5,32 +5,28 @@ using System.Collections;
 
 public class Playermovement : MonoBehaviour
 {
-		public float movementSpeed = 5.0f;
-		public string player = "1";
-		public bool isFalling = false;
-		float fallSpeed = 3f;
-		public Trap fallingIn;
-		float movingTowardsTrapSpeed = 1f;
-	
-		protected Animator animator;
-	
-		void Start ()
+	public float movementSpeed = 5.0f;
+	public string player = "1";
+	public bool isFalling = false;
+	float fallSpeed = 3f;
+	public Vector3 fallingIn;
+	float movingTowardsTrapSpeed = 1f;
+	protected Animator animator;
+	void Start ()
+	{
+		animator = GetComponent<Animator> ();
+		animator.SetInteger ("direction", 0);
+		animator.speed = 0;
+	}
+	void Update ()
+	{
+		if (isFalling && (transform.localScale.x > 0f))
 		{
-		
-				animator = GetComponent<Animator> ();
-				animator.SetInteger ("direction", 0);
-				animator.speed = 0;
-		
+			Debug.Log("And he falls");
+			transform.localScale -= new Vector3(fallSpeed * Time.deltaTime, fallSpeed * Time.deltaTime, 0f);
+			transform.position = Vector3.MoveTowards(transform.position, fallingIn, movingTowardsTrapSpeed * Time.deltaTime);
+			return;
 		}
-	
-		void Update ()
-		{
-				if (isFalling && (transform.localScale.x > 0f)) {
-						Debug.Log ("And he falls");
-						transform.localScale -= new Vector3 (fallSpeed * Time.deltaTime, fallSpeed * Time.deltaTime, 0f);
-						transform.position = Vector3.MoveTowards (transform.position, fallingIn.gameObject.transform.position, movingTowardsTrapSpeed * Time.deltaTime);
-						return;
-				}
 				//rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0); //Set X and Z velocity to 0
 
 				if (Input.GetJoystickNames ().Length >= int.Parse (player)) {

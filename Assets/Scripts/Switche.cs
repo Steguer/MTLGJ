@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TrapSwitch : MonoBehaviour {
+public class Switche : MonoBehaviour {
 
     public bool state = false;
     public SwitchEvent parent;
+    public Sprite sprite1;
+    public Sprite sprite2;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +21,7 @@ public class TrapSwitch : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D collider2d) 
     {
         Debug.Log("Entering");
+        GetComponent<SpriteRenderer>().sprite = sprite2;
         parent.activateEvent();
     }
 
@@ -29,6 +32,7 @@ public class TrapSwitch : MonoBehaviour {
     void OnTriggerExit2D(Collider2D collider2d)
     {
         Debug.Log("Exiting");
+        GetComponent<SpriteRenderer>().sprite = sprite1;
         parent.deactivateEvent();
     }
 }
