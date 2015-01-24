@@ -136,7 +136,7 @@ public class Playermovement : MonoBehaviour
 				
 			}
 			
-			/*	else if(int.Parse(player)==2){
+				else if(int.Parse(player)==2){
 					
 					
 					if(Input.GetKeyDown (KeyCode.UpArrow)){
@@ -198,20 +198,8 @@ public class Playermovement : MonoBehaviour
 						
 					}
 					
-					if (Input.GetButtonDown (Input.GetKeyDown (KeyCode.Keypad1))) {
-						Debug.Log ("suicide of " + player);
+					
 					}
-					
-					if (Input.GetButtonDown (Input.GetKeyDown (KeyCode.Keypad2))) {
-						Debug.Log ("action of " + player);
-					}
-					
-					if (Input.GetButtonDown (Input.GetKeyDown (KeyCode.Keypad3))) {
-						Debug.Log ("pause of " + player);
-					}
-					
-					
-					}*/
 			
 		}
 	}
