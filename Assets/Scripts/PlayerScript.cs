@@ -24,6 +24,7 @@ public class PlayerScript : MonoBehaviour {
 			speed.x * inputX,
 			speed.y * inputY);
 
+
 	}
 	
 	void OnDestroy()
