@@ -15,7 +15,7 @@ public class creditsScrolling : MonoBehaviour
 						//at 50 pixels per 2
 						//seconds (or 25 pixels per
 						//1 second
-						GUI.Box (new Rect (0, yPosition, Screen.width, 1000), "Credits\n\n Credits\n\n Credits\n\n Credits\n\n Credits\n\n  Credits\n\n Credits\n\n");
+						GUI.Box (new Rect (0, yPosition, Screen.width, 1000), "Programmers\n\n Credits\n\n Credits\n\n Credits\n\n Credits\n\n  Credits\n\n Credits\n\n");
 						
 				} else if (yPosition <= Screen.height) {
 						reroll = true;
@@ -23,7 +23,7 @@ public class creditsScrolling : MonoBehaviour
 						GUI.Box (new Rect (0, yPosition, Screen.width, 1000), "Credits\n\n Credits\n\n Credits\n\n Credits\n\n Credits\n\n  Credits\n\n Credits\n\n");
 				} else {
 						//loadlevel
-						Debug.Log ("loadlevel1");
+                    Destroy(this);
 				}
 		
 				/*if (cumulativeTime > Screen.height) {
