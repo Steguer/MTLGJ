@@ -5,7 +5,8 @@ public class PickupStatue : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log("Roll credits");
         GetComponent<SpriteRenderer>().active = false;
+        Time.timeScale = 0;
+        Application.LoadLevelAdditive(1); 
     }
 }
