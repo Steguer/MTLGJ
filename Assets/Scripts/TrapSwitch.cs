@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Switch : MonoBehaviour {
+public class TrapSwitch : MonoBehaviour {
 
     public bool state = false;
     public SwitchEvent parent;

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SwitchEvent : MonoBehaviour {
 
-    public GameObject[] switches;
+    public GameObject[] trapSwitches;
     public GameObject[] traps;
     public bool allSwitchesAreNeeded = false;
     bool allSwitchesActivated = false;
@@ -11,18 +11,18 @@ public class SwitchEvent : MonoBehaviour {
 
     void Start()
     {
-        foreach (GameObject element in switches)
+        foreach (GameObject element in trapSwitches)
         {
-            element.GetComponent<Switch>().parent = this;
+            element.GetComponent<TrapSwitch>().parent = this;
         }
     }
 
     public void activateEvent()
     {
         activatedSwitchCount += 1;
-        if (activatedSwitchCount == switches.GetLength(0)) //Shit-induced hack
+        if (activatedSwitchCount == trapSwitches.GetLength(0)) //Shit-induced hack
             allSwitchesActivated = true;
-        Debug.Log(switches.GetLength(0) + "RRRR");
+        Debug.Log(trapSwitches.GetLength(0) + "RRRR");
         if ((activatedSwitchCount > 0) && (!allSwitchesAreNeeded || allSwitchesActivated))
         {
             Debug.Log("Turning on traps");
@@ -35,7 +35,7 @@ public class SwitchEvent : MonoBehaviour {
     {
         allSwitchesActivated = false;
         activatedSwitchCount -= 1;
-        if ((activatedSwitchCount == 0 && !allSwitchesAreNeeded) || (allSwitchesAreNeeded && (activatedSwitchCount < switches.GetLength(0)))) //Shit-induced hack x 2
+        if ((activatedSwitchCount == 0 && !allSwitchesAreNeeded) || (allSwitchesAreNeeded && (activatedSwitchCount < trapSwitches.GetLength(0)))) //Shit-induced hack x 2
         {
             Debug.Log("Turning off traps");
             foreach (GameObject element in traps)
