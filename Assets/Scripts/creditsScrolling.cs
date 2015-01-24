@@ -3,21 +3,27 @@ using System.Collections;
 
 public class creditsScrolling : MonoBehaviour
 {
-		float cumulativeTime = 0.0f;
-		float yPosition = Screen.height;
+		private float cumulativeTime = 0.0f;
+		private float yPosition = Screen.height;
+		private bool reroll = false;
+		private int vitesse = 25;
 
 		void OnGUI ()
 		{
-				if (yPosition >= -200) {
-						yPosition -= Time.deltaTime * 25;
+				if (yPosition >= -200 && !reroll) {
+						yPosition -= Time.deltaTime * vitesse;
 						//at 50 pixels per 2
 						//seconds (or 25 pixels per
 						//1 second
 						GUI.Box (new Rect (0, yPosition, Screen.width, 1000), "Credits\n\n Credits\n\n Credits\n\n Credits\n\n Credits\n\n  Credits\n\n Credits\n\n");
 						
+				} else if (yPosition <= Screen.height) {
+						reroll = true;
+						yPosition += Time.deltaTime * 6 * vitesse;
+						GUI.Box (new Rect (0, yPosition, Screen.width, 1000), "Credits\n\n Credits\n\n Credits\n\n Credits\n\n Credits\n\n  Credits\n\n Credits\n\n");
 				} else {
 						//loadlevel
-					Debug.Log("loadlevel1");
+						Debug.Log ("loadlevel1");
 				}
 		
 				/*if (cumulativeTime > Screen.height) {
