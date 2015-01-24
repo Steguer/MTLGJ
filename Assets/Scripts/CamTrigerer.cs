@@ -4,6 +4,7 @@ using System.Collections;
 public class CamTrigerer : MonoBehaviour {
 
     public GameObject camera;
+	public GameObject beforeTile;
 
     /* 0 = top
      * 1 = right
@@ -12,7 +13,12 @@ public class CamTrigerer : MonoBehaviour {
      */
     public int position = 0;
 
-    void OnTriggerEnter2D(Collider2D collider)
+	void Start () 
+	{
+		camera = GameObject.FindGameObjectWithTag ("MainCamera");
+	}
+
+    void OnTriggerExit2D(Collider2D collider)
     {
 		if (collider.gameObject.tag != "Player")
 			return;
@@ -39,5 +45,11 @@ public class CamTrigerer : MonoBehaviour {
         }
         else
             Debug.Log("Invalid cam trigger 'position' variable");
+
+		collider2D.isTrigger = false;
     }
+
+	void OnTriggerEnter2D(Collider2D collider) {
+		beforeTile.collider2D.isTrigger = false;
+	}
 }
