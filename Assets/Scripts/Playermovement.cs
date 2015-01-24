@@ -7,10 +7,10 @@ public class Playermovement : MonoBehaviour
 {
 		public float movementSpeed = 5.0f;
 		public string player = "1";
-        public bool isFalling = false;
-        float fallSpeed = 3f;
-        public Trap fallingIn;
-        float movingTowardsTrapSpeed = 1f;
+		public bool isFalling = false;
+		float fallSpeed = 3f;
+		public Trap fallingIn;
+		float movingTowardsTrapSpeed = 1f;
 	
 		protected Animator animator;
 	
@@ -25,13 +25,12 @@ public class Playermovement : MonoBehaviour
 	
 		void Update ()
 		{
-            if (isFalling && (transform.localScale.x > 0f))
-            {
-                Debug.Log("And he falls");
-                transform.localScale -= new Vector3(fallSpeed * Time.deltaTime, fallSpeed * Time.deltaTime, 0f);
-                transform.position = Vector3.MoveTowards(transform.position, fallingIn.gameObject.transform.position, movingTowardsTrapSpeed * Time.deltaTime);
-                return;
-            }
+				if (isFalling && (transform.localScale.x > 0f)) {
+						Debug.Log ("And he falls");
+						transform.localScale -= new Vector3 (fallSpeed * Time.deltaTime, fallSpeed * Time.deltaTime, 0f);
+						transform.position = Vector3.MoveTowards (transform.position, fallingIn.gameObject.transform.position, movingTowardsTrapSpeed * Time.deltaTime);
+						return;
+				}
 				//rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0); //Set X and Z velocity to 0
 
 				if (Input.GetJoystickNames ().Length >= int.Parse (player)) {
@@ -72,59 +71,53 @@ public class Playermovement : MonoBehaviour
 				} else {
 			
 						if (int.Parse (player) == 1) {
-				
+								bool isRunning = false;
+								animator.speed = 1;
 
-								if (Input.GetKeyDown (KeyCode.W)) {
+								if (Input.GetKey (KeyCode.W)) {
 										animator.SetInteger ("direction", 1);
-										animator.speed = 1;
-								} else if (animator.GetInteger ("direction") == 1 && Input.GetKeyUp (KeyCode.W)) {
-										animator.SetInteger ("direction", 0);
-										animator.speed = 0;
+										isRunning = true;
 								}
 				
-								if (Input.GetKeyDown (KeyCode.D)) {
+								if (Input.GetKey (KeyCode.D)) {
+										isRunning = true;
 										animator.SetInteger ("direction", 4);
-										animator.speed = 1;
-								} else if (animator.GetInteger ("direction") == 4 && Input.GetKeyUp (KeyCode.D)) {
-										animator.SetInteger ("direction", 0);
-										animator.speed = 0;
-								}
+								} 
 				
-								if (Input.GetKeyDown (KeyCode.S)) {
+								if (Input.GetKey (KeyCode.S)) {
+										isRunning = true;
 										animator.SetInteger ("direction", 2);
-										animator.speed = 1;
-								} else if (animator.GetInteger ("direction") == 2 && Input.GetKeyUp (KeyCode.S)) {
-										animator.SetInteger ("direction", 0);
-										animator.speed = 0;
 								}
 				
-								if (Input.GetKeyDown (KeyCode.A)) {
+								if (Input.GetKey (KeyCode.A)) {
+										isRunning = true;
 										animator.SetInteger ("direction", 3);
-										animator.speed = 1;
-								} else if (animator.GetInteger ("direction") == 3 && Input.GetKeyUp (KeyCode.A)) {
-										animator.SetInteger ("direction", 0);
-										animator.speed = 0;
 								}
+
+								animator.SetBool ("isRunning", isRunning);
+
 				
-				
-								switch (animator.GetInteger ("direction")) {
-								case 1:
-										transform.Translate (0, 1 * Time.deltaTime * movementSpeed, 0);
-										break;
-								case 2:
-										transform.Translate (0, -1 * Time.deltaTime * movementSpeed, 0);
-										break;
-								case 3:
-										transform.Translate (-1 * Time.deltaTime * movementSpeed, 0, 0);
-										break;		
-								case 4:
-										transform.Translate (1 * Time.deltaTime * movementSpeed, 0, 0);
-										break;
-								default:
-										break;
+								Debug.Log (isRunning);
+
+								if (isRunning) {
+										switch (animator.GetInteger ("direction")) {
+										case 1:
+												transform.Translate (0, 1 * Time.deltaTime * movementSpeed, 0);
+												break;
+										case 2:
+												transform.Translate (0, -1 * Time.deltaTime * movementSpeed, 0);
+												break;
+										case 3:
+												transform.Translate (-1 * Time.deltaTime * movementSpeed, 0, 0);
+												break;		
+										case 4:
+												transform.Translate (1 * Time.deltaTime * movementSpeed, 0, 0);
+												break;
+										default:
+												break;
 					
+										}
 								}
-				
 								if (Input.GetKeyDown (KeyCode.R)) {
 										Debug.Log ("suicide of " + player);
 								}
@@ -140,73 +133,67 @@ public class Playermovement : MonoBehaviour
 				
 				
 						} else if (int.Parse (player) == 2) {
-					
-					
-								if (Input.GetKeyDown (KeyCode.UpArrow)) {
-										animator.SetInteger ("direction", 1);
-										animator.speed = 1;
-								} else if (animator.GetInteger ("direction") == 1 && Input.GetKeyUp (KeyCode.UpArrow)) {
-										animator.SetInteger ("direction", 0);
-										animator.speed = 0;
-								}
-					
-								if (Input.GetKeyDown (KeyCode.RightArrow)) {
-										animator.SetInteger ("direction", 4);
-										animator.speed = 1;
-								} else if (animator.GetInteger ("direction") == 4 && Input.GetKeyUp (KeyCode.RightArrow)) {
-										animator.SetInteger ("direction", 0);
-										animator.speed = 0;
-								}
-					
-								if (Input.GetKeyDown (KeyCode.DownArrow)) {
-										animator.SetInteger ("direction", 2);
-										animator.speed = 1;
-								} else if (animator.GetInteger ("direction") == 2 && Input.GetKeyUp (KeyCode.DownArrow)) {
-										animator.SetInteger ("direction", 0);
-										animator.speed = 0;
-								}
-					
-								if (Input.GetKeyDown (KeyCode.LeftArrow)) {
-										animator.SetInteger ("direction", 3);
-										animator.speed = 1;
-								} else if (animator.GetInteger ("direction") == 3 && Input.GetKeyUp (KeyCode.LeftArrow)) {
-										animator.SetInteger ("direction", 0);
-										animator.speed = 0;
-								}
-					
-					
-								switch (animator.GetInteger ("direction")) {
-								case 1:
-										transform.Translate (0, 1 * Time.deltaTime * movementSpeed, 0);
-										break;
-								case 2:
-										transform.Translate (0, -1 * Time.deltaTime * movementSpeed, 0);
-										break;
-								case 3:
-										transform.Translate (-1 * Time.deltaTime * movementSpeed, 0, 0);
-										break;		
-								case 4:
-										transform.Translate (1 * Time.deltaTime * movementSpeed, 0, 0);
-										break;
-								default:
-										break;
+				bool isRunning = false;
+				animator.speed = 1;
+				
+				if (Input.GetKey (KeyCode.UpArrow)) {
+					animator.SetInteger ("direction", 1);
+					isRunning = true;
+				}
+				
+				if (Input.GetKey (KeyCode.RightArrow)) {
+					isRunning = true;
+					animator.SetInteger ("direction", 4);
+				} 
+				
+				if (Input.GetKey (KeyCode.DownArrow)) {
+					isRunning = true;
+					animator.SetInteger ("direction", 2);
+				}
+				
+				if (Input.GetKey (KeyCode.LeftArrow)) {
+					isRunning = true;
+					animator.SetInteger ("direction", 3);
+				}
+				
+				animator.SetBool ("isRunning", isRunning);
+				
+				
+				Debug.Log (isRunning);
+				
+				if (isRunning) {
+					switch (animator.GetInteger ("direction")) {
+					case 1:
+						transform.Translate (0, 1 * Time.deltaTime * movementSpeed, 0);
+						break;
+					case 2:
+						transform.Translate (0, -1 * Time.deltaTime * movementSpeed, 0);
+						break;
+					case 3:
+						transform.Translate (-1 * Time.deltaTime * movementSpeed, 0, 0);
+						break;		
+					case 4:
+						transform.Translate (1 * Time.deltaTime * movementSpeed, 0, 0);
+						break;
+					default:
+						break;
 						
-								}
+					}
+				}
+				if (Input.GetKeyDown ("[1]")) {
+					Debug.Log ("suicide of " + player);
+				}
 				
-								if (Input.GetKeyDown ("[1]")) {
-										Debug.Log ("suicide of " + player);
-								}
+				if (Input.GetKeyDown ("[2]")) {
+					Debug.Log ("action of " + player);
+				}
 				
-								if (Input.GetKeyDown ("[2]")) {
-										Debug.Log ("action of " + player);
-								}
+				if (Input.GetKeyDown ("[3]")) {
+					Debug.Log ("pause of " + player);
+				}
 				
-								if (Input.GetKeyDown ("[3]")) {
-										Debug.Log ("pause of " + player);
-								}
+				
 
-					
-					
 						}
 
 			
