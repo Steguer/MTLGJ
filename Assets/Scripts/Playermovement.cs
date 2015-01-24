@@ -7,7 +7,7 @@ public class Playermovement : MonoBehaviour
 		public string player = "1";
         public bool isFalling = false;
         float fallSpeed = 3f;
-        public Trap fallingIn;
+        public Vector3 fallingIn;
         float movingTowardsTrapSpeed = 1f;
 	
 		protected Animator animator;
@@ -27,7 +27,7 @@ public class Playermovement : MonoBehaviour
             {
                 Debug.Log("And he falls");
                 transform.localScale -= new Vector3(fallSpeed * Time.deltaTime, fallSpeed * Time.deltaTime, 0f);
-                transform.position = Vector3.MoveTowards(transform.position, fallingIn.gameObject.transform.position, movingTowardsTrapSpeed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, fallingIn, movingTowardsTrapSpeed * Time.deltaTime);
                 return;
             }
 				//rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0); //Set X and Z velocity to 0
