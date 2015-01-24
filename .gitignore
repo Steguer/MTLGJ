@@ -21,3 +21,5 @@ sysinfo.txt
 *.log
 *.pdf
 *.gz
+Assets/test.unity
+Assets/test.unity.meta
