@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CamTrigerer : MonoBehaviour {
 
-    public GameObject camera;
+    GameObject camera;
 
     /* 0 = top
      * 1 = right
@@ -11,6 +11,11 @@ public class CamTrigerer : MonoBehaviour {
      * 3 = left
      */
     public int position = 0;
+
+	void Start () 
+	{
+		camera = GameObject.FindGameObjectWithTag ("MainCamera");
+	}
 
     void OnTriggerEnter2D(Collider2D collider)
     {
