@@ -29,7 +29,7 @@ public class StepCounter : MonoBehaviour
 				}
 				if (frameCompteur == 7) {
 						compteur++;
-						Debug.Log (compteur);
+						//Debug.Log (compteur);
 						frameCompteur = 0;
 				}
 		}
