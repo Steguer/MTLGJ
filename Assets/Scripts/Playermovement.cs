@@ -21,7 +21,7 @@ public class Playermovement : MonoBehaviour
 	
 	void Update() {
 		//rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0); //Set X and Z velocity to 0
-		
+
 		if (Input.GetJoystickNames().Length >= int.Parse(player)) {
 			
 			
@@ -61,7 +61,7 @@ public class Playermovement : MonoBehaviour
 			
 			if(int.Parse(player)==1){
 				
-				
+
 				if(Input.GetKeyDown (KeyCode.W)){
 					animator.SetInteger("direction", 1);
 					animator.speed=1;
@@ -132,6 +132,7 @@ public class Playermovement : MonoBehaviour
 				if (Input.GetKeyDown (KeyCode.Y)) {
 					Debug.Log ("pause of " + player);
 				}
+
 				
 				
 			}
@@ -197,21 +198,29 @@ public class Playermovement : MonoBehaviour
 						break;
 						
 					}
+				
+				if (Input.GetKeyDown("[1]")) {
+					Debug.Log ("suicide of " + player);
+				}
+				
+				if (Input.GetKeyDown("[2]")) {
+					Debug.Log ("action of " + player);
+				}
+				
+				if (Input.GetKeyDown("[3]")) {
+					Debug.Log ("pause of " + player);
+				}
+
 					
 					
 					}
+
 			
 		}
+
 	}
 	
-	void setAllFalse(){
-		animator.SetBool ("IsUp", false);
-		animator.SetBool ("IsDown", false);
-		animator.SetBool ("IsLeft", false);
-		animator.SetBool ("IsRight", false);
-		animator.speed=1;
-	}
-	
+
 	void FixedUpdate()
 	{
 		// 5 - Move the game object
