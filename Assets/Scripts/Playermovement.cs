@@ -15,8 +15,26 @@ public class Playermovement : MonoBehaviour
 	}
 
     void Update() {
-        //rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0); //Set X and Z velocity to 0
+        
+	}
 
+	void OnCollisionEnter(Collision collision) {
+
+		
+	}
+	
+	void setAllFalse(){
+		animator.SetBool ("IsUp", false);
+		animator.SetBool ("IsDown", false);
+		animator.SetBool ("IsLeft", false);
+		animator.SetBool ("IsRight", false);
+		animator.speed=1;
+	}
+
+    void FixedUpdate()
+    {
+		//rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0); //Set X and Z velocity to 0
+		
 		// 3 - Retrieve axis information
 		float inputX = Input.GetAxis("HorizontalPlayer_" + player);
 		float inputY = Input.GetAxis("VerticalPlayer_" + player);
@@ -33,33 +51,21 @@ public class Playermovement : MonoBehaviour
 		} else {
 			animator.speed=0;
 		}
- 
-        transform.Translate(Input.GetAxis("HorizontalPlayer_" + player) * Time.deltaTime * movementSpeed, 0, 0);
+		
+		transform.Translate(Input.GetAxis("HorizontalPlayer_" + player) * Time.deltaTime * movementSpeed, 0, 0);
 		transform.Translate(0, Input.GetAxis("VerticalPlayer_" + player) * Time.deltaTime * movementSpeed, 0);
 		
 		if(Input.GetButtonDown("suicidePlayer_" + player)) {
 			Debug.Log("suicide of " + player);
 		}
-
+		
 		if(Input.GetButtonDown("actionPlayer_" + player)) {
 			Debug.Log("action of " + player);
 		}
-
+		
 		if(Input.GetButtonDown("pausePlayer_" + player)) {
 			Debug.Log("pause of " + player);
 		}
-	}
-
-	void setAllFalse(){
-		animator.SetBool ("IsUp", false);
-		animator.SetBool ("IsDown", false);
-		animator.SetBool ("IsLeft", false);
-		animator.SetBool ("IsRight", false);
-		animator.speed=1;
-	}
-
-    void FixedUpdate()
-    {
 		// 5 - Move the game object
 		//rigidbody2D.velocity = movement;
     }
