@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System; //This allows the IComparable Interface
 
 public class CamTrigerer : MonoBehaviour {
+	int nbrPlayers = 2;
 
-    public GameObject camera;
+    GameObject camera;
 	public GameObject beforeTile;
 	public GameObject afterTile;
-	public int nbrPlayers = 2;
 	private int players = 0;
 	private bool enaSwitch = true;
 
