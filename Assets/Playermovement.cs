@@ -17,6 +17,14 @@ public class Playermovement : MonoBehaviour
 		if(Input.GetButtonDown("suicidePlayer_" + player)) {
 			Debug.Log("suicide of " + player);
 		}
+
+		if(Input.GetButtonDown("actionPlayer_" + player)) {
+			Debug.Log("action of " + player);
+		}
+
+		if(Input.GetButtonDown("pausePlayer_" + player)) {
+			Debug.Log("pause of " + player);
+		}
 	}
 
     void FixedUpdate()
