@@ -14,6 +14,9 @@ public class CamTrigerer : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+		if (collider.gameObject.tag != "Player")
+			return;
+
         if (position == 0)
         {
             camera.GetComponent<MoveCam>().moveUp();
