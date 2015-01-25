@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System; //This allows the IComparable Interface
 
 public class CamTrigerer : MonoBehaviour {
-	int nbrPlayers = 2;
+	int nbrPlayers = 4;
 
     GameObject camera;
 	public GameObject beforeTile;
