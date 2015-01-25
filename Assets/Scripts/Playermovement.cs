@@ -76,9 +76,12 @@ public class Playermovement : MonoBehaviour
 						animator.SetBool ("isRunning", isRunning);
 
 						if(Input.GetButtonDown("ActionPlayer_" + player)){
-								this.throwActionA();
+							this.throwActionA();
 						}
-
+						
+						if(Input.GetButtonDown("ActionPlayer2_" + player)){
+							this.throwActionB();
+						}
 
 
 
