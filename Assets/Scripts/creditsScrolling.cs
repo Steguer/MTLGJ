@@ -6,7 +6,7 @@ public class creditsScrolling : MonoBehaviour
 		private float cumulativeTime = 0.0f;
 		private float yPosition = Screen.height;
 		private bool reroll = false;
-		private int vitesse = 25;
+		private int vitesse = 60;
 
 		void OnGUI ()
 		{
@@ -23,7 +23,8 @@ public class creditsScrolling : MonoBehaviour
 						GUI.Box (new Rect (0, yPosition, Screen.width, 1000), "Credits\n\n Credits\n\n Credits\n\n Credits\n\n Credits\n\n  Credits\n\n Credits\n\n");
 				} else {
 						//loadlevel
-                    Destroy(this);
+                    Application.LoadLevel(2); 
+
 				}
 		
 				/*if (cumulativeTime > Screen.height) {
