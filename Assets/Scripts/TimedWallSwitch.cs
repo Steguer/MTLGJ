@@ -9,7 +9,7 @@ public class TimedWallSwitch : Switch {
     public bool isLocked = false; // if locked, the switch cannot be activated, even if in range
     private bool isActivatable = false; // if a player is in collision with the switch, it becomes "activatable"
     private bool isActive = false;
-    public float activeMaxTime = 300f;
+    public float activeMaxTime = 30f;
     public float activeTime = 0f;
     public float decrementStep = 1f;
 
@@ -22,14 +22,11 @@ public class TimedWallSwitch : Switch {
     void Update() {
 
         if (activeTime > 0f) {
-
-            Debug.Log(this.activeTime);
-
+            
             this.activeTime -= decrementStep;
             if (this.activeTime <= 0f) {
                 this.activeTime = 0f;
 
-                Debug.Log(this.activeTime);
                 this.isActive = false;
                 parent.deactivateEvent();
                 GetComponent<SpriteRenderer>().sprite = sprite1;
@@ -53,10 +50,23 @@ public class TimedWallSwitch : Switch {
         if (this.isActivatable) {
             if (collider2d.tag == "Player") {
 
-                //Input.GetKeyDown( collider2d.gameObject.GetComponent<Playermovement>().player. ) // FIXME: use specific player `action` button
+                string playerNo = collider2d.gameObject.GetComponent<Playermovement>().player;
+                bool proceed = false;
+                switch (playerNo) {
+                    case "1": if (Input.GetKeyDown(KeyCode.T)) { proceed = true; }
+                        break;
+                    case "2": if (Input.GetKeyDown("[2]")) { proceed = true; }
+                        break;
+                    case "3": if (Input.GetButtonDown("ActionPlayer_3")) { proceed = true; }
+                        break;
+                    case "4": if (Input.GetButtonDown("ActionPlayer_4")) { proceed = true; }
+                        break;
+                    default:
+                        break;
+                }
 
-                if (Input.GetKeyDown(KeyCode.Return)) {
-
+                if (proceed) {
+                 
                     this.isActive = !this.isActive; // toggle the switch
 
                     if (this.isActive) {

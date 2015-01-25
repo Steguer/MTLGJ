@@ -37,9 +37,23 @@ public class WallSwitch : Switch {
         if (this.isActivatable) {
             if (collider2d.tag == "Player") {
 
-                //Input.GetKeyDown( collider2d.gameObject.GetComponent<Playermovement>().player. ) // FIXME: use specific player `action` button
+                string playerNo = collider2d.gameObject.GetComponent<Playermovement>().player;
+                bool proceed = false;
+                switch (playerNo) {
+                    case "1": if (Input.GetKeyDown(KeyCode.T)) { proceed = true; }
+                        break;
+                    case "2": if (Input.GetKeyDown("[2]")) { proceed = true; }
+                        break;
+                    case "3": if (Input.GetButtonDown("ActionPlayer_3")) { proceed = true; }
+                        break;
+                    case "4": if (Input.GetButtonDown("ActionPlayer_4")) { proceed = true; }
+                        break;
+                    default:
+                        break;
+                }
 
-                if (Input.GetKeyDown(KeyCode.Return)) { 
+                if (proceed) {
+                 
                     
                     this.isActive = !this.isActive; // toggle the switch
 
