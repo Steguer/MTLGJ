@@ -8,22 +8,26 @@ public class creditsScrolling : MonoBehaviour
 		private bool reroll = false;
 		private int vitesse = 40;
 
+
 		void OnGUI ()
 		{
-				if (yPosition >= -200 && !reroll) {
+				if (yPosition >= -300 && !reroll) {
 						yPosition -= Time.deltaTime * vitesse;
 						//at 50 pixels per 2
 						//seconds (or 25 pixels per
 						//1 second
-                        GUI.Box(new Rect(0, yPosition, Screen.width, 1000), "Programmers\n\n Yvan Richer\n\n Corentin Raoult\n\n Jean Philippe Parent\n\n Steven Gerard\n\n  Kevin Leblanc \n\n\n Designer\n\n Francois Lim\n\n");
-						
+
+			GUI.Box (new Rect (0, yPosition, Screen.width, 1000), "Designer\n\n François LIM\n\n\nProgrammers\n\n Kevin LEBLANC\n\n Steven GERARD\n\n Jean-Philippe PARENT\n\n Yvan RICHER\n\n  Corentin RAOULT\n\n");
+			//GUI.Box (new Rect (0, yPosition+1*60, Screen.width, 1000), "Programmers\n\n	");	
 				} else if (yPosition <= Screen.height) {
 						reroll = true;
-						yPosition += Time.deltaTime * 6 * vitesse;
-                        GUI.Box(new Rect(0, yPosition, Screen.width, 1000), "Programmers\n\n Yvan Richer\n\n Corentin Raoult\n\n Jean Philippe Parent\n\n Steven Gerard\n\n  Kevin Leblanc \n\n\n Designer\n\n Francois Lim\n\n");
-				} else {
+						yPosition += Time.deltaTime * 7 * vitesse;
+			GUI.Box (new Rect (0, yPosition, Screen.width, 1000), "Designer\n\n François LIM\n\n\nProgrammers\n\n Kevin LEBLANC\n\n Steven GERARD\n\n Jean-Philippe PARENT\n\n Yvan RICHER\n\n  Corentin RAOULT\n\n");
+		} else {
+
+
 						//loadlevel
-                    Application.LoadLevel(2); 
+			Application.LoadLevel(Application.loadedLevel+1); 
 
 				}
 		
