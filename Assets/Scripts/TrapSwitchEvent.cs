@@ -37,7 +37,6 @@ public class TrapSwitchEvent : SwitchEvent {
         activatedSwitchCount -= 1;
         if ((activatedSwitchCount == 0 && !allSwitchesAreNeeded) || (allSwitchesAreNeeded && (activatedSwitchCount < trapSwitches.GetLength(0)))) //Shit-induced hack x 2
         {
-            Debug.Log("Turning off traps");
             foreach (GameObject element in traps)
                 element.GetComponent<Trap>().turnOff();
         }
