@@ -68,7 +68,8 @@ public class MovableBlock : MovableScript {
 
 		//	coll.gameObject.SendMessage("setPushing", false);
 
-		nbrPusher --;
+		if(nbrPusher > 0)
+			nbrPusher--;
 		checkNbrPusher ();
 		
 		Debug.Log ("Player leave");
