@@ -16,7 +16,7 @@ public class Playermovement : MonoBehaviour
 {
 	public float movementSpeed = 5.0f;
 	public string player = "1";
-	public bool isFalling = false;
+	public bool isFalling = true;//false;
 	float fallSpeed = 3f;
 	public Vector3 fallingIn;
 	float movingTowardsTrapSpeed = 1f;
@@ -35,12 +35,14 @@ public class Playermovement : MonoBehaviour
 		}
 		void Update ()
 		{
-            if (isFalling && (transform.localScale.x > 0f))
-            {
-                transform.localScale -= new Vector3(fallSpeed * Time.deltaTime, fallSpeed * Time.deltaTime, 0f);
-                transform.position = Vector3.MoveTowards(transform.position, fallingIn, movingTowardsTrapSpeed * Time.deltaTime);
-                return;
-            }
+				animator.SetBool ("isFalling", isFalling);
+				if (isFalling && (transform.localScale.x > 0f)) {
+						Debug.Log ("And he falls");
+						transform.localScale -= new Vector3 (fallSpeed * Time.deltaTime, fallSpeed * Time.deltaTime, 0f);
+						transform.position = Vector3.MoveTowards (transform.position, fallingIn, movingTowardsTrapSpeed * Time.deltaTime);
+						return;
+				}
+
 				//rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0); //Set X and Z velocity to 0
 				translation.Set (0, 0, 0);
 				if (int.Parse (player) > 2) {
