@@ -16,7 +16,7 @@ public class Playermovement : MonoBehaviour
 {
 	public float movementSpeed = 5.0f;
 	public string player = "1";
-	public bool isFalling = false;
+	public bool isFalling = true;//false;
 	float fallSpeed = 3f;
 	public Vector3 fallingIn;
 	float movingTowardsTrapSpeed = 1f;
@@ -35,6 +35,7 @@ public class Playermovement : MonoBehaviour
 		}
 		void Update ()
 		{
+				animator.SetBool ("isFalling", isFalling);
 				if (isFalling && (transform.localScale.x > 0f)) {
 						Debug.Log ("And he falls");
 						transform.localScale -= new Vector3 (fallSpeed * Time.deltaTime, fallSpeed * Time.deltaTime, 0f);
