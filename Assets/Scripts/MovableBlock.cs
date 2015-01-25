@@ -6,11 +6,13 @@ public class MovableBlock : MovableScript {
 	public bool canMove = false;
 	Vector2 previousPosition;
     public bool destroyWhenDone = false;
+    Vector3 origin;
 
 	public int neededPusher = 2;
 
 	void Start () {
 		previousPosition = transform.position;
+        origin = transform.position;
 	}
 
 	void Update () {
@@ -72,5 +74,10 @@ public class MovableBlock : MovableScript {
 		
 		Debug.Log ("Player leave");
 	}
+
+    void reset()
+    {
+        transform.position = origin;
+    }
 
 }

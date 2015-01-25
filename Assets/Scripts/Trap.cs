@@ -37,4 +37,10 @@ public class Trap : MonoBehaviour {
             }
         }
     }
+
+    void reset()
+    {
+        isOn = false;
+        GetComponent<SpriteRenderer>().sprite = sprite1;
+    }
 }
