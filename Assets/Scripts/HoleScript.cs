@@ -7,8 +7,9 @@ public class HoleScript : MonoBehaviour {
 	{
 		if (collider.gameObject.tag == "Player") {
 			collider.gameObject.GetComponent<Playermovement> ().setFalling(true, this.transform.position);
-			Debug.Log ("Collider is Enter Hole");
+			Debug.Log ("Player is Falling");
 		} else {
+			collider.gameObject.GetComponent<MovableScript> ().setFalling(true, this.transform.position);
 			Debug.Log ("Collider is not the Player");
 		}
 	}
