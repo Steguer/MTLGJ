@@ -1,3 +1,13 @@
+/*
+ * 
+ * P1 : AWSD + T (A) + Space (B)
+ * P2 : Arrows + 2 (A) + 0 (B)
+ * P3 : Manette ou 5 (A)
+ * P4 : Manette ou 8 (A)
+ * */
+
+
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -205,11 +215,19 @@ public class Playermovement : MonoBehaviour
 										Debug.Log ("pause of " + player);
 								}
 						}
-				}
-		}
-	
 
-		void FixedUpdate ()
+				
+				}
+		//Tricks pour les 2 autres joueurs
+		if(int.Parse(player) == 3 && Input.GetKeyDown("[5]"))
+			throwActionA();
+		else if(int.Parse (player) == 4 && Input.GetKeyDown("[8]")) {
+			throwActionA();
+		}
+	}
+	
+	
+	void FixedUpdate ()
 		{
 				transform.Translate (translation);
 		}
@@ -237,7 +255,7 @@ public class Playermovement : MonoBehaviour
 
 		public void throwActionA ()
 		{
-			List<GameObject> test = GetComponent<ThrowPlayer> ().ThrowVictimList;
+			List<GameObject> test = GetComponent<ThrowPlayer> ().PusherList;
 			for (int i=0; i<test.Count; i++) {
 				test [i].GetComponent<ThrowPlayer> ().IncCount ();
 			}

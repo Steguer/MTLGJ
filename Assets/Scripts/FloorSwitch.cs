@@ -21,8 +21,8 @@ public class FloorSwitch : Switch {
     void OnTriggerEnter2D(Collider2D collider2d) 
     {
         Debug.Log("Entering");
-        GetComponent<SpriteRenderer>().sprite = sprite2;
-        parent.activateEvent();
+        //GetComponent<SpriteRenderer>().sprite = sprite2;
+        //parent.activateEvent();
     }
 
     void OnTriggerStay2D(Collider2D collider2d) {
