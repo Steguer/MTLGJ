@@ -35,7 +35,7 @@ public class TrapSwitchEvent : SwitchEvent {
     {
         allSwitchesActivated = false;
         activatedSwitchCount -= 1;
-        if ((activatedSwitchCount == 0 && !allSwitchesAreNeeded) || (allSwitchesAreNeeded && (activatedSwitchCount < trapSwitches.GetLength(0)))) //Shit-induced hack x 2
+        if ((!allSwitchesAreNeeded) || (allSwitchesAreNeeded && (activatedSwitchCount == trapSwitches.GetLength(0) - 1)))
         {
             foreach (GameObject element in traps)
                 element.GetComponent<Trap>().toggle();
