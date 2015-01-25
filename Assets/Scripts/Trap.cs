@@ -7,18 +7,20 @@ public class Trap : MonoBehaviour {
     public Sprite sprite2;
     public bool isOn = false;
 
-    public void turnOn() 
-    {
-        Debug.Log("Turning trap on");
-        GetComponent<SpriteRenderer>().sprite = sprite2;
-        isOn = true;
-    }
 
-    public void turnOff()
+    public void toggle()
     {
-        Debug.Log("Turning trap off");
-        GetComponent<SpriteRenderer>().sprite = sprite1;
-        isOn = false;
+        if (isOn)
+        {
+            GetComponent<SpriteRenderer>().sprite = sprite1;
+            isOn = false;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().sprite = sprite2;
+            isOn = true;
+        }
+
     }
 
     void OnTriggerEnter2D(Collider2D collider)

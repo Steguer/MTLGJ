@@ -27,7 +27,7 @@ public class TrapSwitchEvent : SwitchEvent {
         {
             Debug.Log("Turning on traps");
             foreach (GameObject element in traps)
-                element.GetComponent<Trap>().turnOn();
+                element.GetComponent<Trap>().toggle();
         }
     }
 
@@ -38,7 +38,7 @@ public class TrapSwitchEvent : SwitchEvent {
         if ((activatedSwitchCount == 0 && !allSwitchesAreNeeded) || (allSwitchesAreNeeded && (activatedSwitchCount < trapSwitches.GetLength(0)))) //Shit-induced hack x 2
         {
             foreach (GameObject element in traps)
-                element.GetComponent<Trap>().turnOff();
+                element.GetComponent<Trap>().toggle();
         }
     }
 
