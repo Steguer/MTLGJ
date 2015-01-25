@@ -4,7 +4,6 @@ using System.Collections;
 public class FloorSwitch : Switch {
 
     public bool state = false;
-    public SwitchEvent parent;
     public Sprite sprite1;
     public Sprite sprite2;
 
