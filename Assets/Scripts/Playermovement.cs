@@ -64,12 +64,7 @@ public class Playermovement : MonoBehaviour
 						animator.SetBool ("isRunning", isRunning);
 
 						if(Input.GetButtonDown("ActionPlayer_" + player)){
-							List<GameObject> test = GetComponent<ThrowPlayer> ().ThrowVictimList;
-							for (int i=0; i<test.Count; i++) {
-								test [i].GetComponent<ThrowPlayer> ().IncCount ();
-							}
-							
-							Debug.Log ("action of " + player);
+								this.throwActionA();
 						}
 
 
