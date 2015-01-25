@@ -23,7 +23,7 @@ public class Trap : MonoBehaviour {
 
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    void OnTriggerStay2D(Collider2D collider)
     {
         if (isOn)
         {
