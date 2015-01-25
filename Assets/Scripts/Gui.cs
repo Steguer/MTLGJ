@@ -34,11 +34,11 @@ public class Gui : MonoBehaviour {
 					GUI.color = Color.green;
 					break;
 				case 2:
-					GUILayout.BeginArea (new Rect (0, Screen.height-Screen.width/5, Screen.width/5, Screen.height/10));
+					GUILayout.BeginArea (new Rect (0, Screen.height-Screen.height/10, Screen.width/5, Screen.height/10));
 					GUI.color = Color.yellow;
 					break;
 				case 3:
-					GUILayout.BeginArea (new Rect (Screen.width-Screen.width/5, Screen.height-Screen.width/5, Screen.width/5, Screen.height/10));
+					GUILayout.BeginArea (new Rect (Screen.width-Screen.width/5, Screen.height-Screen.height/10, Screen.width/5, Screen.height/10));
 					GUI.color = Color.magenta;
 					break;
 				default:
