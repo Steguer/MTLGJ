@@ -5,7 +5,7 @@ public class MoveCam : MonoBehaviour {
 
     public Vector3 targetPosition = new Vector3(0f, 0f, -10f);
     public bool isMoving = false;
-    public float speed = 10f;
+    public float speed = 15f;
 	
 	// Update is called once per frame
 	void Update () {
@@ -15,27 +15,9 @@ public class MoveCam : MonoBehaviour {
             isMoving = false;
 	}
 
-    public void moveUp()
+    public void moveTo(GameObject cameraAnchor)
     {
+        targetPosition = cameraAnchor.transform.position;
         isMoving = true;
-        targetPosition.y += 10f;
-    }
-
-    public void moveRight()
-    {
-        isMoving = true;
-        targetPosition.x += 17f;
-    }
-
-    public void moveDown()
-    {
-        isMoving = true;
-        targetPosition.y -= 10f;
-    }
-
-    public void moveLeft()
-    {
-        isMoving = true;
-        targetPosition.x -= 17f;
     }
 }
