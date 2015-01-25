@@ -2,14 +2,18 @@
 using System.Collections;
 
 public class MovableScript : MonoBehaviour {
-	public bool isFalling = false;
-	public Vector3 fallingPosition;
-	public float fallSpeed = 2f;
-	public float movingTowardsTrapSpeed = 1f;
-
+	protected bool isFalling = false;
+	protected Vector3 fallingPosition;
+	protected float fallSpeed = 2f;
+	protected float movingTowardsTrapSpeed = 1f;
+	
+	Vector3 origin;
+	Vector3 scale;
+	
 	// Use this for initialization
 	void Start () {
-	
+		origin = transform.position;
+		scale = transform.localScale;
 	}
 	
 	// Update is called once per frame
@@ -28,5 +32,12 @@ public class MovableScript : MonoBehaviour {
 		if(value) {
 			fallingPosition = position;
 		}
+	}
+
+	void reset()
+	{
+		transform.position = origin;
+		transform.localScale = scale;
+		
 	}
 }
