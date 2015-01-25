@@ -9,7 +9,7 @@ public class ThrowPlayer : MonoBehaviour {
 	private Vector3 nextPosition;
 	public bool isFlying = false;
 	public float speed = 10f;
-	public int playersNbr = 2;
+	public int playersNbr = 4;
 
 	public List<GameObject> ThrowVictimList {
 		get {
