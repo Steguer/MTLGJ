@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ThrowPlayer : MonoBehaviour {
-	private int throwCount;
+	private int vilainCount;
+	private List<bool> playersList;
 	private List<GameObject> throwVictimList;
+	private Vector3 nextPosition;
+	private bool enaFlight = false;
 	public float speed = 10f;
+	public int playersNbr = 2;
 
 	public List<GameObject> ThrowVictimList {
 		get {
@@ -14,34 +18,118 @@ public class ThrowPlayer : MonoBehaviour {
 	}
 
 	public void IncCount() {
-		throwCount++;
-		Debug.Log("throwCount: " + throwCount);
+		++vilainCount;
+		Debug.Log("throwCount: " + vilainCount);
 	}
 
 	// Use this for initialization
 	void Start () {
 		throwVictimList = new List<GameObject>();
-		throwCount = 0;
+		playersList = new List<bool>(playersNbr);
+		for(int i=0; i<playersNbr; i++) {
+			playersList.Add(false);
+		}
+		vilainCount = 0;
+		enaFlight = false;
+		nextPosition = new Vector3();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 tmp = new Vector3(0, 3.0f, 0);
-		if(throwCount >= 1 && (Vector3.Distance(transform.position + tmp, gameObject.transform.position) > 0)) {
-			transform.position = Vector3.MoveTowards(transform.position, transform.position + tmp, speed * Time.deltaTime);
+		if(vilainCount >= 1) {
+			Vector3 tmp;
+			int dir = gameObject.GetComponent<Playermovement>().GetComponent<Animator>().GetInteger("direction");
+			switch (dir) {
+			case 1:
+				tmp = new Vector3(0, 3.0f, 0);
+				break;
+			case 2:
+				tmp = new Vector3(0, -3.0f, 0);
+				break;
+			case 3:
+				tmp = new Vector3(-3.0f, 0, 0);
+				break;
+			case 4:
+				tmp = new Vector3(3.0f, 0, 0);
+				break;
+			default: 
+				tmp = new Vector3(0, 3.0f, 0);
+				break;
+			}
+
+			nextPosition = transform.position + tmp;
+			enaFlight = true;
+		}
+		if(enaFlight && (Vector3.Distance(nextPosition, gameObject.transform.position) > 0)) {
+			transform.position = Vector3.MoveTowards(transform.position, nextPosition , speed * Time.deltaTime);
 		}
 		else {
-			throwCount = 0;
+			enaFlight = false;
 		}
+		vilainCount = 0;
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
 		if(collider.gameObject.tag == "Player") {
-			throwVictimList.Add(collider.gameObject);
+			if(collider.gameObject.GetComponent<Playermovement>().player == "1") {
+				if(playersList[0] == false) {
+					playersList[0] = true;
+					throwVictimList.Add(collider.gameObject);
+				}
+			}
+			if(collider.gameObject.GetComponent<Playermovement>().player == "2") {
+				if(playersList[1] == false) {
+					playersList[1] = true;
+					throwVictimList.Add(collider.gameObject);
+				}
+			}
+			if(collider.gameObject.GetComponent<Playermovement>().player == "3") {
+				if(playersList[2] == false) {
+					playersList[2] = true;
+					throwVictimList.Add(collider.gameObject);
+				}
+			}
+			if(collider.gameObject.GetComponent<Playermovement>().player == "4") {
+				if(playersList[3] == false) {
+					playersList[3] = true;
+					throwVictimList.Add(collider.gameObject);
+				}
+			}
+			Debug.Log("Add to list");
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D collider) {
-		throwVictimList.Remove(collider.gameObject);
+		if(collider.gameObject.tag != "Player")
+			return;
+
+		if(collider.gameObject.GetComponent<Playermovement>().player == "1") {
+			if(playersList[0] == true) {
+				playersList[0] = false;
+				throwVictimList.Remove(collider.gameObject);
+			}
+		}
+		if(collider.gameObject.GetComponent<Playermovement>().player == "2") {
+			if(playersList[1] == true) {
+				playersList[1] = false;
+				throwVictimList.Remove(collider.gameObject);
+			}
+		}
+		if(collider.gameObject.GetComponent<Playermovement>().player == "3") {
+			if(playersList[2] == true) {
+				playersList[2] = false;
+				throwVictimList.Remove(collider.gameObject);
+			}
+		}
+		if(collider.gameObject.GetComponent<Playermovement>().player == "4") {
+			if(playersList[3] == true) {
+				playersList[3] = false;
+				throwVictimList.Remove(collider.gameObject);
+			}
+		}
+	}
+
+	void OnCollisionEnter2D(Collision2D collider) {
+		enaFlight = false;
 	}
 }

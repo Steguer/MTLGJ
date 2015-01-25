@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Playermovement : MonoBehaviour
 {
@@ -124,6 +123,10 @@ public class Playermovement : MonoBehaviour
 								}
 				
 								if (Input.GetKeyDown (KeyCode.T)) {
+										List<GameObject> test = GetComponent<ThrowPlayer>().ThrowVictimList;
+										for(int i=0; i<test.Count; i++) {
+											test[i].GetComponent<ThrowPlayer>().IncCount();
+										}
 										Debug.Log ("action of " + player);
 								}
 				
@@ -186,6 +189,10 @@ public class Playermovement : MonoBehaviour
 								}
 				
 								if (Input.GetKeyDown ("[2]")) {
+										List<GameObject> test = GetComponent<ThrowPlayer>().ThrowVictimList;
+										for(int i=0; i<test.Count; i++) {
+											test[i].GetComponent<ThrowPlayer>().IncCount();
+										}
 										Debug.Log ("action of " + player);
 								}
 				
