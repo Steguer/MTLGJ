@@ -93,9 +93,6 @@ public class Playermovement : MonoBehaviour
 
 								animator.SetBool ("isRunning", isRunning);
 
-				
-								Debug.Log (isRunning);
-
 								if (isRunning) {
 										switch (animator.GetInteger ("direction")) {
 										case 1:
@@ -154,9 +151,6 @@ public class Playermovement : MonoBehaviour
 				}
 				
 				animator.SetBool ("isRunning", isRunning);
-				
-				
-				Debug.Log (isRunning);
 				
 				if (isRunning) {
 					switch (animator.GetInteger ("direction")) {
