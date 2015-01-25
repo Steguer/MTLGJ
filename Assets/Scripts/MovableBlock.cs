@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class MovableBlock : MonoBehaviour {
+public class MovableBlock : MovableScript {
 	int nbrPusher = 0;
-	bool canMove = false;
+	public bool canMove = false;
 	Vector2 previousPosition;
+    public bool destroyWhenDone = false;
 
 	public int neededPusher = 2;
 
@@ -13,6 +14,16 @@ public class MovableBlock : MonoBehaviour {
 	}
 
 	void Update () {
+
+        if (isFalling && (transform.localScale.x > 0f))
+        {
+            transform.localScale -= new Vector3(fallSpeed * Time.deltaTime, fallSpeed * Time.deltaTime, 0f);
+            transform.position = Vector3.MoveTowards(transform.position, fallingPosition, movingTowardsTrapSpeed * Time.deltaTime);
+            destroyWhenDone = true;
+        }
+        else if (destroyWhenDone)
+            Destroy(this.gameObject);
+
 		if(!canMove) 
 		{
 			transform.position = previousPosition;
@@ -61,4 +72,5 @@ public class MovableBlock : MonoBehaviour {
 		
 		Debug.Log ("Player leave");
 	}
+
 }

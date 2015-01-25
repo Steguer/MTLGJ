@@ -25,9 +25,16 @@ public class Trap : MonoBehaviour {
     {
         if (isOn)
         {
-            collider.gameObject.GetComponent<Playermovement>().isFalling = true;
-           // collider.gameObject.GetComponent<Animator>().active = false;
-            collider.gameObject.GetComponent<Playermovement>().fallingIn = this.transform.position;
+            if (collider.gameObject.tag == "Player")
+            {
+                collider.gameObject.GetComponent<Playermovement>().setFalling(true, this.transform.position);
+                Debug.Log("Player is Falling");
+            }
+            else
+            {
+                collider.gameObject.GetComponent<MovableScript>().setFalling(true, this.transform.position);
+                Debug.Log("Collider is not the Player");
+            }
         }
     }
 }

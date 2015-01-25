@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class MovableScript : MonoBehaviour {
-	bool isFalling = false;
-	Vector3 fallingPosition;
-	float fallSpeed = 2f;
-	float movingTowardsTrapSpeed = 1f;
+	public bool isFalling = false;
+	public Vector3 fallingPosition;
+	public float fallSpeed = 2f;
+	public float movingTowardsTrapSpeed = 1f;
 
 	// Use this for initialization
 	void Start () {
@@ -13,7 +13,7 @@ public class MovableScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public void Update () {
 		if (isFalling && (transform.localScale.x > 0f))
 		{
 			Debug.Log("And he falls");
