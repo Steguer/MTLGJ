@@ -7,7 +7,7 @@ public class ThrowPlayer : MonoBehaviour {
 	private List<bool> playersList;
 	private List<GameObject> throwVictimList;
 	private Vector3 nextPosition;
-	private bool enaFlight = false;
+	public bool isFlying = false;
 	public float speed = 10f;
 	public int playersNbr = 2;
 
@@ -30,7 +30,7 @@ public class ThrowPlayer : MonoBehaviour {
 			playersList.Add(false);
 		}
 		vilainCount = 0;
-		enaFlight = false;
+		isFlying = false;
 		nextPosition = new Vector3();
 	}
 	
@@ -58,45 +58,46 @@ public class ThrowPlayer : MonoBehaviour {
 			}
 
 			nextPosition = transform.position + tmp;
-			enaFlight = true;
+			isFlying = true;
 		}
-		if(enaFlight && (Vector3.Distance(nextPosition, gameObject.transform.position) > 0)) {
+		if(isFlying && (Vector3.Distance(nextPosition, gameObject.transform.position) > 0)) {
 			transform.position = Vector3.MoveTowards(transform.position, nextPosition , speed * Time.deltaTime);
 		}
 		else {
-			enaFlight = false;
+			isFlying = false;
 		}
 		vilainCount = 0;
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
-		if(collider.gameObject.tag == "Player") {
-			if(collider.gameObject.GetComponent<Playermovement>().player == "1") {
-				if(playersList[0] == false) {
-					playersList[0] = true;
-					throwVictimList.Add(collider.gameObject);
-				}
+		if(collider.gameObject.tag != "Player")
+			return;
+
+		if(collider.gameObject.GetComponent<Playermovement>().player == "1") {
+			if(playersList[0] == false) {
+				playersList[0] = true;
+				throwVictimList.Add(collider.gameObject);
 			}
-			if(collider.gameObject.GetComponent<Playermovement>().player == "2") {
-				if(playersList[1] == false) {
-					playersList[1] = true;
-					throwVictimList.Add(collider.gameObject);
-				}
-			}
-			if(collider.gameObject.GetComponent<Playermovement>().player == "3") {
-				if(playersList[2] == false) {
-					playersList[2] = true;
-					throwVictimList.Add(collider.gameObject);
-				}
-			}
-			if(collider.gameObject.GetComponent<Playermovement>().player == "4") {
-				if(playersList[3] == false) {
-					playersList[3] = true;
-					throwVictimList.Add(collider.gameObject);
-				}
-			}
-			Debug.Log("Add to list");
 		}
+		if(collider.gameObject.GetComponent<Playermovement>().player == "2") {
+			if(playersList[1] == false) {
+				playersList[1] = true;
+				throwVictimList.Add(collider.gameObject);
+			}
+		}
+		if(collider.gameObject.GetComponent<Playermovement>().player == "3") {
+			if(playersList[2] == false) {
+				playersList[2] = true;
+				throwVictimList.Add(collider.gameObject);
+			}
+		}
+		if(collider.gameObject.GetComponent<Playermovement>().player == "4") {
+			if(playersList[3] == false) {
+				playersList[3] = true;
+				throwVictimList.Add(collider.gameObject);
+			}
+		}
+		Debug.Log("Add to list");
 	}
 
 	void OnTriggerExit2D(Collider2D collider) {
@@ -127,9 +128,12 @@ public class ThrowPlayer : MonoBehaviour {
 				throwVictimList.Remove(collider.gameObject);
 			}
 		}
+		Debug.Log ("Remove to list");
 	}
 
 	void OnCollisionEnter2D(Collision2D collider) {
-		enaFlight = false;
+		if(collider.gameObject.tag == "Hole")
+			return;
+		isFlying = false;
 	}
 }

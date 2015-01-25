@@ -6,10 +6,11 @@ public class FloorSwitch : Switch {
     public bool state = false;
     public Sprite sprite1;
     public Sprite sprite2;
+    Vector3 origin;
 
 	// Use this for initialization
 	void Start () {
-	
+        origin = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -31,6 +32,13 @@ public class FloorSwitch : Switch {
     void OnTriggerExit2D(Collider2D collider2d)
     {
         Debug.Log("Exiting");
+        GetComponent<SpriteRenderer>().sprite = sprite1;
+        parent.deactivateEvent();
+    }
+
+    void reset()
+    {
+        transform.position = origin;
         GetComponent<SpriteRenderer>().sprite = sprite1;
         parent.deactivateEvent();
     }
