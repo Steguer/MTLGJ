@@ -13,7 +13,7 @@ public class TrapSwitchEvent : SwitchEvent {
     {
         foreach (GameObject element in trapSwitches)
         {
-            element.GetComponent<Switche>().parent = this;
+            element.GetComponent<Switch>().parent = this;
         }
     }
 

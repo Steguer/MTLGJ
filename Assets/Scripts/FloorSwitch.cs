@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Switche : MonoBehaviour {
+public class FloorSwitch : Switch {
 
     public bool state = false;
     public SwitchEvent parent;
