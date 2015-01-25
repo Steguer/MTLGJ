@@ -52,6 +52,8 @@ public class WallSwitch : Switch {
                         break;
                 }
 
+				Debug.Log ("Action Switch "+proceed);
+
                 if (proceed) {
                  
                     
