@@ -7,12 +7,14 @@ public class MovableBlock : MovableScript {
 	Vector2 previousPosition;
     public bool destroyWhenDone = false;
     Vector3 origin;
+    Vector3 scale;
 
 	public int neededPusher = 2;
 
 	void Start () {
 		previousPosition = transform.position;
         origin = transform.position;
+        scale = transform.localScale;
 	}
 
 	void Update () {
@@ -78,6 +80,8 @@ public class MovableBlock : MovableScript {
     void reset()
     {
         transform.position = origin;
+        transform.localScale = scale;
+
     }
 
 }
