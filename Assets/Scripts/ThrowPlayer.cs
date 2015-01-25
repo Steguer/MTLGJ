@@ -8,10 +8,11 @@ public class ThrowPlayer : MonoBehaviour {
 	private List<GameObject> pusherList;
 	private Vector3 previousPosition;
 	private Vector3 nextPosition;
+	private int playersNbr = 4;
+	private float lastSynchro = 0;
+
 	public bool isFlying = false;
 	public float speed = 10f;
-	public int playersNbr = 4;
-	private float lastSynchro = 0;
 	public float deltaSynchro = 0.4f;
 
 	public List<GameObject> PusherList {
@@ -78,7 +79,7 @@ public class ThrowPlayer : MonoBehaviour {
 				pusherList.Add(collider.gameObject);
 			}
 		}
-		Debug.Log("Add to list");
+		//Debug.Log("Add to list");
 	}
 
 	void OnTriggerExit2D(Collider2D collider) {
@@ -109,7 +110,7 @@ public class ThrowPlayer : MonoBehaviour {
 				pusherList.Remove(collider.gameObject);
 			}
 		}
-		Debug.Log ("Remove to list");
+		//Debug.Log ("Remove to list");
 	}
 
 	void OnCollisionEnter2D(Collision2D collider) {
@@ -147,26 +148,27 @@ public class ThrowPlayer : MonoBehaviour {
 
 	void throwPlayer (int power)
 	{
+		float value = 2f + (float)power;
 		Vector3 tmp;
 		int dir = gameObject.GetComponent<Playermovement>().GetComponent<Animator>().GetInteger("direction");
 		switch (dir) {
 		case 1:
-			tmp = new Vector3(0, 3.0f, 0);
+			tmp = new Vector3(0, value, 0);
 			break;
 		case 2:
-			tmp = new Vector3(0, -3.0f, 0);
+			tmp = new Vector3(0, -(value), 0);
 			break;
 		case 3:
-			tmp = new Vector3(-3.0f, 0, 0);
+			tmp = new Vector3(-(value), 0, 0);
 			break;
 		case 4:
-			tmp = new Vector3(3.0f, 0, 0);
+			tmp = new Vector3(value, 0, 0);
 			break;
 		default: 
-			tmp = new Vector3(0, 3.0f, 0);
+			tmp = new Vector3(0, value, 0);
 			break;
 		}
-		Debug.Log ("throw player power : " + power);
+		Debug.Log ("throw player power : " + value);
 		nextPosition = transform.position + tmp;
 		isFlying = true;
 	}
