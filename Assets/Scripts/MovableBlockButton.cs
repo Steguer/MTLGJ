@@ -87,7 +87,6 @@ public class MovableBlockButton : MovableScript {
 
 	void checkingSynchro ()
 	{
-
 		if(nbrPusher == 0) {
 			lastSynchro = Time.fixedTime;
 			return;
@@ -121,7 +120,7 @@ public class MovableBlockButton : MovableScript {
 
 	public void ActionPressed (int player)
 	{
-		Debug.Log ("plyaer " + player);
+		//Debug.Log ("Action Pressed " + player);
 		pushCount[player-1]++;
 	}
 }
