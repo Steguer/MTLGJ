@@ -3,9 +3,29 @@ using System.Collections;
 
 public class PickupStatue : MonoBehaviour {
 
-    void OnTriggerEnter2D(Collider2D collider)
+	public AudioClip snd;
+	private bool played;
+
+	void Start(){
+		played = false;
+	}
+
+	void/*IEnumerator*/ OnTriggerEnter2D(Collider2D collider)
     {
         GetComponent<SpriteRenderer>().active = false;
-        Application.LoadLevel(1);
+
+		if(played == false){
+			audio.PlayOneShot(snd);
+			//yield return new WaitForSeconds(snd.length);
+			played = true;
+			Application.LoadLevel(1);
+		}
+       
     }
+
+	void OnTriggerExit(Collider col){
+		played = false;
+	}
 }
+
+
