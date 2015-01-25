@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class titleScreenKey : MonoBehaviour {
+public class titleScreenKey  : MonoBehaviour {
 
 	public Texture aTexture;
 

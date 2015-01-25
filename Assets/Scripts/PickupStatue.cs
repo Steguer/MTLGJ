@@ -15,10 +15,10 @@ public class PickupStatue : MonoBehaviour {
         GetComponent<SpriteRenderer>().active = false;
 
 		if(played == false){
-			audio.PlayOneShot(snd);
+			//audio.PlayOneShot(snd);
 			//yield return new WaitForSeconds(snd.length);
-			played = true;
-			Application.LoadLevel(1);
+			//played = true;
+			Application.LoadLevel(Application.loadedLevel+1);
 		}
        
     }
