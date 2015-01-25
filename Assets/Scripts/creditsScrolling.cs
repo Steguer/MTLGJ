@@ -6,7 +6,7 @@ public class creditsScrolling : MonoBehaviour
 		private float cumulativeTime = 0.0f;
 		private float yPosition = Screen.height;
 		private bool reroll = false;
-		private int vitesse = 60;
+		private int vitesse = 40;
 
 		void OnGUI ()
 		{
@@ -15,12 +15,12 @@ public class creditsScrolling : MonoBehaviour
 						//at 50 pixels per 2
 						//seconds (or 25 pixels per
 						//1 second
-						GUI.Box (new Rect (0, yPosition, Screen.width, 1000), "Programmers\n\n Credits\n\n Credits\n\n Credits\n\n Credits\n\n  Credits\n\n Credits\n\n");
+                        GUI.Box(new Rect(0, yPosition, Screen.width, 1000), "Programmers\n\n Yvan Richer\n\n Corentin Raoult\n\n Jean Philippe Parent\n\n Steven Gerard\n\n  Kevin Leblanc \n\n\n Designer\n\n Francois Lim\n\n");
 						
 				} else if (yPosition <= Screen.height) {
 						reroll = true;
 						yPosition += Time.deltaTime * 6 * vitesse;
-						GUI.Box (new Rect (0, yPosition, Screen.width, 1000), "Credits\n\n Credits\n\n Credits\n\n Credits\n\n Credits\n\n  Credits\n\n Credits\n\n");
+                        GUI.Box(new Rect(0, yPosition, Screen.width, 1000), "Programmers\n\n Yvan Richer\n\n Corentin Raoult\n\n Jean Philippe Parent\n\n Steven Gerard\n\n  Kevin Leblanc \n\n\n Designer\n\n Francois Lim\n\n");
 				} else {
 						//loadlevel
                     Application.LoadLevel(2); 
