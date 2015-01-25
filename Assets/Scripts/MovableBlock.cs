@@ -3,18 +3,16 @@ using System.Collections;
 
 public class MovableBlock : MovableScript {
 	int nbrPusher = 0;
-	public bool canMove = false;
+	bool canMove = false;
 	Vector2 previousPosition;
-    public bool destroyWhenDone = false;
-    Vector3 origin;
-    Vector3 scale;
+	float lastSynchro = 0;
+	float deltaSynchro = 0.3f;
 
 	public int neededPusher = 2;
+	public bool checkingSynchro = true;
 
 	void Start () {
 		previousPosition = transform.position;
-        origin = transform.position;
-        scale = transform.localScale;
 	}
 
 	void Update () {
@@ -23,8 +21,9 @@ public class MovableBlock : MovableScript {
         {
             transform.localScale -= new Vector3(fallSpeed * Time.deltaTime, fallSpeed * Time.deltaTime, 0f);
             transform.position = Vector3.MoveTowards(transform.position, fallingPosition, movingTowardsTrapSpeed * Time.deltaTime);
-            destroyWhenDone = true;
         }
+
+		checkSynchro ();
 
 		if(!canMove) 
 		{
@@ -75,11 +74,24 @@ public class MovableBlock : MovableScript {
 		Debug.Log ("Player leave");
 	}
 
-    void reset()
-    {
-        transform.position = origin;
-        transform.localScale = scale;
+	void checkSynchro ()
+	{
+		if(!checkingSynchro)
+			return;
 
-    }
-
+		if(nbrPusher == 0) {
+			lastSynchro = Time.fixedTime;
+			return;
+		}
+		
+		float delta = Time.fixedTime - lastSynchro;
+		
+		if( delta > deltaSynchro )
+		{
+			//Debug.Log ("delta : " + delta);
+			lastSynchro = Time.fixedTime;
+			nbrPusher = 0;
+			canMove = false;
+		}
+	}
 }
