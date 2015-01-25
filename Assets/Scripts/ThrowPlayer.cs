@@ -148,29 +148,33 @@ public class ThrowPlayer : MonoBehaviour {
 
 	void throwPlayer (int power)
 	{
-		float value = 2f + (float)power;
-		Vector3 tmp;
-		int dir = gameObject.GetComponent<Playermovement>().GetComponent<Animator>().GetInteger("direction");
-		switch (dir) {
-		case 1:
-			tmp = new Vector3(0, value, 0);
-			break;
-		case 2:
-			tmp = new Vector3(0, -(value), 0);
-			break;
-		case 3:
-			tmp = new Vector3(-(value), 0, 0);
-			break;
-		case 4:
-			tmp = new Vector3(value, 0, 0);
-			break;
-		default: 
-			tmp = new Vector3(0, value, 0);
-			break;
-		}
-		Debug.Log ("throw player power : " + value);
-		nextPosition = transform.position + tmp;
-		isFlying = true;
+        if (!isFlying)
+        {
+            float value = 2f + (float)power;
+            Vector3 tmp;
+            int dir = gameObject.GetComponent<Playermovement>().GetComponent<Animator>().GetInteger("direction");
+            switch (dir)
+            {
+                case 1:
+                    tmp = new Vector3(0, value, 0);
+                    break;
+                case 2:
+                    tmp = new Vector3(0, -(value), 0);
+                    break;
+                case 3:
+                    tmp = new Vector3(-(value), 0, 0);
+                    break;
+                case 4:
+                    tmp = new Vector3(value, 0, 0);
+                    break;
+                default:
+                    tmp = new Vector3(0, value, 0);
+                    break;
+            }
+            Debug.Log("throw player power : " + value);
+            nextPosition = transform.position + tmp;
+            isFlying = true;
+        }
 	}
 }
 	

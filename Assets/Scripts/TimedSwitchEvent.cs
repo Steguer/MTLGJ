@@ -53,7 +53,7 @@ public class TimedSwitchEvent : SwitchEvent {
         if ((activatedSwitchCount > 0) && (!allSwitchesAreNeeded || allSwitchesActivated) && simultaneousActivationWindow > 0f) {
             
             foreach (GameObject element in traps)
-                element.GetComponent<Trap>().turnOn();
+                element.GetComponent<Trap>().toggle();
         }
     }
 
@@ -67,7 +67,7 @@ public class TimedSwitchEvent : SwitchEvent {
             {
                 //Debug.Log("Turning off traps");
                 foreach (GameObject element in traps)
-                    element.GetComponent<Trap>().turnOff();
+                    element.GetComponent<Trap>().toggle();
             }
         }
     }
