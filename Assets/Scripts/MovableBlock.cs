@@ -25,8 +25,6 @@ public class MovableBlock : MovableScript {
             transform.position = Vector3.MoveTowards(transform.position, fallingPosition, movingTowardsTrapSpeed * Time.deltaTime);
             destroyWhenDone = true;
         }
-        else if (destroyWhenDone)
-            Destroy(this.gameObject);
 
 		if(!canMove) 
 		{
