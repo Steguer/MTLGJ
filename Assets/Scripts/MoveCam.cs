@@ -17,6 +17,7 @@ public class MoveCam : MonoBehaviour {
 
     public void moveTo(GameObject cameraAnchor)
     {
+        targetPosition.z = -30f;
         targetPosition = cameraAnchor.transform.position;
         isMoving = true;
     }
