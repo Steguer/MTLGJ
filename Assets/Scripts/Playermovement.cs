@@ -4,13 +4,14 @@ using System.Collections.Generic;
 
 public class Playermovement : MonoBehaviour
 {
-		public float movementSpeed = 5.0f;
-		public string player = "1";
-		public bool isFalling = false;
-		float fallSpeed = 3f;
-		public Vector3 fallingIn;
-		float movingTowardsTrapSpeed = 1f;
-		protected Animator animator;
+	public float movementSpeed = 5.0f;
+	public string player = "1";
+	public bool isFalling = false;
+	float fallSpeed = 3f;
+	public Vector3 fallingIn;
+	float movingTowardsTrapSpeed = 1f;
+	protected Animator animator;
+	private List<GameObject> actionListeners;
 
 		private Vector3 translation;
 
@@ -20,6 +21,7 @@ public class Playermovement : MonoBehaviour
 				animator.SetInteger ("direction", 0);
 				animator.speed = 0;
 				translation = new Vector3 (0, 0, 0);
+				actionListeners = new List<GameObject> ();
 		}
 		void Update ()
 		{
@@ -62,12 +64,7 @@ public class Playermovement : MonoBehaviour
 						animator.SetBool ("isRunning", isRunning);
 
 						if(Input.GetButtonDown("ActionPlayer_" + player)){
-							List<GameObject> test = GetComponent<ThrowPlayer> ().ThrowVictimList;
-							for (int i=0; i<test.Count; i++) {
-								test [i].GetComponent<ThrowPlayer> ().IncCount ();
-							}
-							
-							Debug.Log ("action of " + player);
+								this.throwActionA();
 						}
 
 
@@ -136,12 +133,11 @@ public class Playermovement : MonoBehaviour
 								}
 
 								if (Input.GetKeyDown (KeyCode.T)) {
-										List<GameObject> test = GetComponent<ThrowPlayer> ().ThrowVictimList;
-										for (int i=0; i<test.Count; i++) {
-												test [i].GetComponent<ThrowPlayer> ().IncCount ();
-										}
+									this.throwActionA();
+								}
 
-										Debug.Log ("action of " + player);
+								if (Input.GetKeyDown (KeyCode.Space)) {
+									this.throwActionB();
 								}
 
 								if (Input.GetKeyDown (KeyCode.Y)) {
@@ -198,18 +194,17 @@ public class Playermovement : MonoBehaviour
 								}
 				
 								if (Input.GetKeyDown ("[2]")) {
-										List<GameObject> test = GetComponent<ThrowPlayer> ().ThrowVictimList;
-										for (int i=0; i<test.Count; i++) {
-												test [i].GetComponent<ThrowPlayer> ().IncCount ();
-										}
-
-										Debug.Log ("action of " + player);
+									this.throwActionA();
 								}
-				
+
+								if (Input.GetKeyDown ("[0]")) {
+										this.throwActionB();
+								}
+								
 								if (Input.GetKeyDown ("[3]")) {
 										Debug.Log ("pause of " + player);
 								}
-						}	
+						}
 				}
 		}
 	
@@ -229,5 +224,35 @@ public class Playermovement : MonoBehaviour
 				this.isFalling = isFalling;
 				this.fallingIn = position;
 		}
-	
+
+		public void addActionListener (GameObject listener)
+		{
+			actionListeners.Add (listener);
+		}
+
+		public void removeActionListener (GameObject listener)
+		{
+			actionListeners.Remove (listener);
+		}
+
+		public void throwActionA ()
+		{
+			List<GameObject> test = GetComponent<ThrowPlayer> ().ThrowVictimList;
+			for (int i=0; i<test.Count; i++) {
+				test [i].GetComponent<ThrowPlayer> ().IncCount ();
+			}
+			
+			Debug.Log ("Action A of " + player);
+		}
+
+		public void throwActionB ()
+		{
+			foreach (GameObject listener in actionListeners)
+			{
+				listener.SendMessage("ActionPressed", int.Parse(player ));
+			}
+			
+			Debug.Log ("Action B of " + player);
+		}
 }
+	

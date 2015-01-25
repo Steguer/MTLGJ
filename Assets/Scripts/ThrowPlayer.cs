@@ -6,6 +6,7 @@ public class ThrowPlayer : MonoBehaviour {
 	private int vilainCount;
 	private List<bool> playersList;
 	private List<GameObject> throwVictimList;
+	private Vector3 previousPosition;
 	private Vector3 nextPosition;
 	public bool isFlying = false;
 	public float speed = 10f;
@@ -67,6 +68,8 @@ public class ThrowPlayer : MonoBehaviour {
 			isFlying = false;
 		}
 		vilainCount = 0;
+
+		this.checkWellFlying ();
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
@@ -135,5 +138,12 @@ public class ThrowPlayer : MonoBehaviour {
 		if(collider.gameObject.tag == "Hole")
 			return;
 		isFlying = false;
+	}
+
+	void checkWellFlying () {
+		if(previousPosition == transform.position)
+		{
+			isFlying = false;
+		}
 	}
 }

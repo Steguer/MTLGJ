@@ -1,18 +1,24 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class MovableBlock : MovableScript {
+public class MovableBlockButton : MovableScript {
 	int nbrPusher = 0;
+	public int pushThreshold = 2;	//Nombre de fois qu'il faut appuyer sur action par seconde chacun
 	bool canMove = false;
 	Vector2 previousPosition;
 	float lastSynchro = 0;
-	float deltaSynchro = 0.3f;
+	public float deltaSynchro = 0.7f;
+	private List<GameObject> interactivePlayers;
+	private List<int> pushCount;
 
 	public int neededPusher = 2;
-	public bool checkSynchro = true;
 
 	void Start () {
 		previousPosition = transform.position;
+		pushCount = new List<int> (4);
+		for(int i = 0; i < 4; i++)
+			pushCount.Add( 0 );
 	}
 
 	void Update () {
@@ -39,14 +45,14 @@ public class MovableBlock : MovableScript {
 		previousPosition = transform.position;
 	}
 
-	void checkNbrPusher ()
+	/*void checkNbrPusher ()
 	{
 		if (nbrPusher >= neededPusher)
 			canMove = true;
 		else
 			canMove = false;
 		Debug.Log ("Pusher "+nbrPusher);
-	}
+	}*/
 
 	void OnCollisionEnter2D(Collision2D coll)
 	{
@@ -54,9 +60,11 @@ public class MovableBlock : MovableScript {
 			return;
 
 		//	coll.gameObject.SendMessage("setPushing", true);
+		//interactivePlayers.Add(coll.gameObject);
+		coll.gameObject.GetComponent<Playermovement> ().addActionListener (this.gameObject);
 
 		nbrPusher++;
-		checkNbrPusher ();
+		//checkNbrPusher ();
 
 		Debug.Log ("Player enter");
 	}
@@ -67,18 +75,18 @@ public class MovableBlock : MovableScript {
 			return;
 
 		//	coll.gameObject.SendMessage("setPushing", false);
+		//interactivePlayers.Remove(coll.gameObject);
+		coll.gameObject.GetComponent<Playermovement> ().removeActionListener (this.gameObject);
 
 		if(nbrPusher > 0)
 			nbrPusher--;
-		checkNbrPusher ();
+		//checkNbrPusher ();
 		
 		Debug.Log ("Player leave");
 	}
 
 	void checkingSynchro ()
 	{
-		if(!checkSynchro)
-			return;
 
 		if(nbrPusher == 0) {
 			lastSynchro = Time.fixedTime;
@@ -89,10 +97,31 @@ public class MovableBlock : MovableScript {
 		
 		if( delta > deltaSynchro )
 		{
+			int completeNbr = 0;
+			for(int i = 0; i < pushCount.Count; i++) {
+				if(pushCount[i] > pushThreshold) {
+					completeNbr++;
+				}
+				pushCount[i] = 0;
+			}
+			if(completeNbr >= neededPusher)
+				canMove = true;
+			else
+				canMove = false;
 			//Debug.Log ("delta : " + delta);
 			lastSynchro = Time.fixedTime;
-			nbrPusher = 0;
-			canMove = false;
 		}
+	}
+	/*void checkingButton () 
+	{
+		foreach(GameObject player in interactivePlayers) {
+
+		}
+	}*/
+
+	public void ActionPressed (int player)
+	{
+		Debug.Log ("plyaer " + player);
+		pushCount[player-1]++;
 	}
 }
