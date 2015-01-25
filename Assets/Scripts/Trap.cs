@@ -5,8 +5,16 @@ public class Trap : MonoBehaviour {
 
     public Sprite sprite1;
     public Sprite sprite2;
-    public bool isOn = false;
+    private bool isOn = false;
+	public bool startOpen = false;
 
+	void Start ()
+	{
+		if(startOpen == true) {
+			isOn = true;
+			GetComponent<SpriteRenderer>().sprite = sprite2;
+		}
+	}
 
     public void toggle()
     {
