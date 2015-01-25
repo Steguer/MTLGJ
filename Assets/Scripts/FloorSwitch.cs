@@ -20,7 +20,7 @@ public class FloorSwitch : Switch {
 
     void OnTriggerEnter2D(Collider2D collider2d) 
     {
-        if (collider2d.gameObject.tag != "proximity")
+        if (collider2d.gameObject.tag != "Proximity")
         {
             Debug.Log("Entering");
             GetComponent<SpriteRenderer>().sprite = sprite2;
@@ -34,7 +34,7 @@ public class FloorSwitch : Switch {
 
     void OnTriggerExit2D(Collider2D collider2d)
     {
-        if (collider2d.gameObject.tag != "proximity")
+        if (collider2d.gameObject.tag != "Proximity")
         {
             Debug.Log("Exiting");
             GetComponent<SpriteRenderer>().sprite = sprite1;
