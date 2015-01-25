@@ -35,12 +35,12 @@ public class Playermovement : MonoBehaviour
 		}
 		void Update ()
 		{
-				if (isFalling && (transform.localScale.x > 0f)) {
-						Debug.Log ("And he falls");
-						transform.localScale -= new Vector3 (fallSpeed * Time.deltaTime, fallSpeed * Time.deltaTime, 0f);
-						transform.position = Vector3.MoveTowards (transform.position, fallingIn, movingTowardsTrapSpeed * Time.deltaTime);
-						return;
-				}
+            if (isFalling && (transform.localScale.x > 0f))
+            {
+                transform.localScale -= new Vector3(fallSpeed * Time.deltaTime, fallSpeed * Time.deltaTime, 0f);
+                transform.position = Vector3.MoveTowards(transform.position, fallingIn, movingTowardsTrapSpeed * Time.deltaTime);
+                return;
+            }
 				//rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0); //Set X and Z velocity to 0
 				translation.Set (0, 0, 0);
 				if (int.Parse (player) > 2) {
@@ -229,10 +229,11 @@ public class Playermovement : MonoBehaviour
 	
 	void FixedUpdate ()
 		{
+            if (!isFalling)
 				transform.Translate (translation);
 		}
 
-		public void setFalling (bool isFalling, Vector3 position)
+	public void setFalling (bool isFalling, Vector3 position)
 		{
 				bool isFlying = gameObject.GetComponent<ThrowPlayer> ().isFlying;
 
@@ -243,17 +244,17 @@ public class Playermovement : MonoBehaviour
 				this.fallingIn = position;
 		}
 
-		public void addActionListener (GameObject listener)
+	public void addActionListener (GameObject listener)
 		{
 			actionListeners.Add (listener);
 		}
 
-		public void removeActionListener (GameObject listener)
+	public void removeActionListener (GameObject listener)
 		{
 			actionListeners.Remove (listener);
 		}
 
-		public void throwActionA ()
+	public void throwActionA ()
 		{
 			List<GameObject> test = GetComponent<ThrowPlayer> ().PusherList;
 			for (int i=0; i<test.Count; i++) {
@@ -263,7 +264,7 @@ public class Playermovement : MonoBehaviour
 			Debug.Log ("Action A of " + player);
 		}
 
-		public void throwActionB ()
+	public void throwActionB ()
 		{
 			foreach (GameObject listener in actionListeners)
 			{
