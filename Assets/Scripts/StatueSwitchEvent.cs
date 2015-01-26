@@ -14,7 +14,7 @@ public class StatueSwitchEvent : SwitchEvent
     {
         foreach (GameObject element in switches)
         {
-            element.GetComponent<FloorSwitch>().parent = this;
+            element.GetComponent<FloorSwitch>().setParent( this );
         }
     }
 

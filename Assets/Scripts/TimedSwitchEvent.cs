@@ -16,7 +16,7 @@ public class TimedSwitchEvent : SwitchEvent {
 
     void Start() {
         foreach (GameObject element in switches) {
-            element.GetComponent<Switch>().parent = this;
+            element.GetComponent<Switch>().setParent( this );
         }
     }
 

@@ -13,7 +13,8 @@ public class TrapSwitchEvent : SwitchEvent {
     {
         foreach (GameObject element in trapSwitches)
         {
-            element.GetComponent<Switch>().parent = this;
+			if(element != null)
+            	element.GetComponent<Switch>().setParent(this);
         }
     }
 
@@ -26,8 +27,10 @@ public class TrapSwitchEvent : SwitchEvent {
         if ((activatedSwitchCount > 0) && (!allSwitchesAreNeeded || allSwitchesActivated))
         {
             Debug.Log("Turning on traps");
-            foreach (GameObject element in traps)
-                element.GetComponent<Trap>().toggle();
+            foreach (GameObject element in traps) {
+            	if(element != null)
+                	element.GetComponent<Trap>().toggle();
+        	}
         }
     }
 
@@ -37,8 +40,10 @@ public class TrapSwitchEvent : SwitchEvent {
         activatedSwitchCount -= 1;
         if ((!allSwitchesAreNeeded) || (allSwitchesAreNeeded && (activatedSwitchCount == trapSwitches.GetLength(0) - 1)))
         {
-            foreach (GameObject element in traps)
-                element.GetComponent<Trap>().toggle();
+			foreach (GameObject element in traps) {
+				if(element != null)
+					element.GetComponent<Trap>().toggle();
+			}
         }
     }
 

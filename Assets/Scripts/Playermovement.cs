@@ -32,15 +32,23 @@ public class Playermovement : MonoBehaviour
 				animator.speed = 0;
 				translation = new Vector3 (0, 0, 0);
 				actionListeners = new List<GameObject> ();
+				GameObject levelManager = GameObject.FindGameObjectWithTag ("LevelManager");
+				levelManager.GetComponent<LevelManager>().setPlayer(int.Parse(this.player)-1, this.gameObject);
 		}
 		void Update ()
 		{
 				animator.SetBool ("isFalling", isFalling);
-				if (isFalling && (transform.localScale.x > 0f)) {
-						Debug.Log ("And he falls");
-						transform.localScale -= new Vector3 (fallSpeed * Time.deltaTime, fallSpeed * Time.deltaTime, 0f);
-						transform.position = Vector3.MoveTowards (transform.position, fallingIn, movingTowardsTrapSpeed * Time.deltaTime);
-						return;
+				if (isFalling) {
+						if ((transform.localScale.x > 0f)) {
+								Debug.Log ("And he falls");
+								transform.localScale -= new Vector3 (fallSpeed * Time.deltaTime, fallSpeed * Time.deltaTime, 0f);
+								transform.position = Vector3.MoveTowards (transform.position, fallingIn, movingTowardsTrapSpeed * Time.deltaTime);
+								return;
+						} else {
+								//Reset
+								GameObject.FindGameObjectWithTag ("LevelManager").GetComponent<LevelManager> ().reset ();
+								Debug.Log ("Reset");
+						}
 				}
 
 				//rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0); //Set X and Z velocity to 0
@@ -144,7 +152,7 @@ public class Playermovement : MonoBehaviour
 										}
 								}
 								if (Input.GetKeyDown (KeyCode.R)) {
-										Debug.Log ("suicide of " + player);
+										throwReset();
 								}
 
 								if (Input.GetKeyDown (KeyCode.T)) {
@@ -205,7 +213,7 @@ public class Playermovement : MonoBehaviour
 										}
 								}
 								if (Input.GetKeyDown ("[1]")) {
-										Debug.Log ("suicide of " + player);
+										throwReset();
 								}
 				
 								if (Input.GetKeyDown ("[2]")) {
@@ -277,6 +285,12 @@ public class Playermovement : MonoBehaviour
 			}
 			
 			Debug.Log ("Action B of " + player);
+
+		}
+		
+		void throwReset ()
+		{
+			GameObject.FindGameObjectWithTag ("LevelManager").GetComponent<LevelManager> ().reset ();
 		}
 }
 	
