@@ -17,7 +17,7 @@ public class creditsScrolling : MonoBehaviour
 						//seconds (or 25 pixels per
 						//1 second
 
-			GUI.Box (new Rect (0, yPosition, Screen.width, 1000), "Designer\n\n François LIM\n\n\nProgrammers\n\n Kevin LEBLANC\n\n Steven GERARD\n\n Jean-Philippe PARENT\n\n Yvan RICHER\n\n  Corentin RAOULT\n\n");
+			GUI.Box (new Rect (0, yPosition, Screen.width, 1000), "The End !\n\nDesigner\n\n François LIM\n\n\nProgrammers\n\n Kevin LEBLANC\n\n Steven GERARD\n\n Jean-Philippe PARENT\n\n Yvan RICHER\n\n  Corentin RAOULT\n\n");
 			//GUI.Box (new Rect (0, yPosition+1*60, Screen.width, 1000), "Programmers\n\n	");	
 				} else if (yPosition <= Screen.height) {
 						reroll = true;

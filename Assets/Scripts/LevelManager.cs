@@ -23,7 +23,7 @@ public class LevelManager : MonoBehaviour {
 	{
 		GameObject room = rooms[roomValue];
 		GetComponent<LevelManagerStored> ().setCurrentRoom ( roomValue ); 
-		//currentRoom = room;
+		
 		GameObject prevCamera = GameObject.FindGameObjectWithTag ("MainCamera");
 		prevCamera.camera.active = false;
 		GameObject nextCamera = ((RoomManager)room.GetComponent<RoomManager> ()).getCamera ();
@@ -55,17 +55,6 @@ public class LevelManager : MonoBehaviour {
 			Debug.Log("No current Room");
 		}
 	}
-
-	public void test () 
-	{
-		int currentRoom = GetComponent<LevelManagerStored> ().getCurrentRoom();
-		Debug.Log ("Current Room Loaded "+currentRoom);
-		changeRoom (currentRoom);
-	}
-
-	/*void Awake() {
-		DontDestroyOnLoad(transform.gameObject);
-	}*/
 
 	public void setRoom (int id, GameObject room){
 		if(id >= rooms.Length) {

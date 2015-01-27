@@ -23,7 +23,7 @@ public class TrapSwitchEvent : SwitchEvent {
         activatedSwitchCount += 1;
         if (activatedSwitchCount == trapSwitches.GetLength(0)) //Shit-induced hack
             allSwitchesActivated = true;
-        Debug.Log(trapSwitches.GetLength(0) + "RRRR");
+        Debug.Log(trapSwitches.GetLength(0) + " activateEvent");
         if ((activatedSwitchCount > 0) && (!allSwitchesAreNeeded || allSwitchesActivated))
         {
             Debug.Log("Turning on traps");

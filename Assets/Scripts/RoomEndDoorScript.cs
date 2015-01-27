@@ -43,6 +43,7 @@ public class RoomEndDoorScript : MonoBehaviour {
 		if(players >= nbrPlayers) {
 			GameObject levelManager = GameObject.FindGameObjectWithTag ("LevelManager");
 			levelManager.GetComponent<LevelManager>().changeRoom(this.linkedRoom);
+			players = 0;
 		}
 	}
 }

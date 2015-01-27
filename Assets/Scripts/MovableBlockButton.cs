@@ -117,8 +117,11 @@ public class MovableBlockButton : MovableScript {
 
 		}
 	}*/
+	public void ActionAPressed (int player)
+	{
+	}
 
-	public void ActionPressed (int player)
+	public void ActionBPressed (int player)
 	{
 		//Debug.Log ("Action Pressed " + player);
 		pushCount[player-1]++;

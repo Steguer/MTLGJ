@@ -24,63 +24,57 @@ public class WallSwitch : Switch {
   
 
     
-    void OnTriggerEnter2D(Collider2D collider2d) {
-              
+    void OnTriggerEnter2D(Collider2D coll) {
+		if(coll.tag != "Player")
+			return;
+			  
         if (!this.isLocked) {
             this.isActivatable = true;
         }
-
+        
+		coll.gameObject.GetComponent<Playermovement> ().addActionListener (this.gameObject);
     }
 
-    void OnTriggerStay2D(Collider2D collider2d) {
-
-        if (this.isActivatable) {
-            if (collider2d.tag == "Player") {
-
-                string playerNo = collider2d.gameObject.GetComponent<Playermovement>().player;
-                bool proceed = false;
-                switch (playerNo) {
-                    case "1": if (Input.GetKeyDown(KeyCode.T)) { proceed = true; }
-                        break;
-                    case "2": if (Input.GetKeyDown("[2]")) { proceed = true; }
-                        break;
-                    case "3": if (Input.GetButtonDown("ActionPlayer_3")) { proceed = true; }
-                        break;
-                    case "4": if (Input.GetButtonDown("ActionPlayer_4")) { proceed = true; }
-                        break;
-                    default:
-                        break;
-                }
-
-				Debug.Log ("Action Switch "+proceed);
-
-                if (proceed) {
-                 
-                    
-                    this.isActive = !this.isActive; // toggle the switch
-
-                    if (this.isActive) {
-                        parent.activateEvent();
-
-                        GetComponent<SpriteRenderer>().sprite = sprite2;
-                    }
-                    else {
-                        parent.deactivateEvent();
-                        GetComponent<SpriteRenderer>().sprite = sprite1;
-                    }
-                }
-            }
-        }
+    void OnTriggerStay2D(Collider2D coll) {
+		if(coll.tag != "Player")
+			return;
+			
+		coll.gameObject.GetComponent<Playermovement> ().addActionListener (this.gameObject);
+        
     }
 
    
-    void OnTriggerExit2D(Collider2D collider2d) {
-
-        if (!this.isLocked) {
-            this.isActivatable = false;
-        }
+    void OnTriggerExit2D(Collider2D coll) {
+		if(coll.tag != "Player")
+			return;
+		
+		if (!this.isLocked) {
+			this.isActivatable = false;
+		}
+		
+		coll.gameObject.GetComponent<Playermovement> ().removeActionListener (this.gameObject);
     }
     
-     
+    public void ActionAPressed (int player)
+    {
+		if (this.isActivatable) {
+			
+			this.isActive = !this.isActive; // toggle the switch
+			
+			if (this.isActive) {
+				parent.activateEvent();
+				
+				GetComponent<SpriteRenderer>().sprite = sprite2;
+			}
+			else {
+				parent.deactivateEvent();
+				GetComponent<SpriteRenderer>().sprite = sprite1;
+			}
+		}
+	}
+	
+	public void ActionBPressed (int player)
+	{
+	}
      
 }

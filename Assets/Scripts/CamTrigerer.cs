@@ -13,13 +13,6 @@ public class CamTrigerer : MonoBehaviour {
 	private bool enaSwitch = true;
     public GameObject cameraAnchor;
 
-    /* 0 = top
-     * 1 = right
-     * 2 = down
-     * 3 = left
-     */
-    public int position = 0;
-
 	void Start () 
 	{
 		camera = GameObject.FindGameObjectWithTag ("MainCamera");
@@ -45,6 +38,7 @@ public class CamTrigerer : MonoBehaviour {
 			beforeTile.collider2D.isTrigger = false;
 			afterTile.collider2D.isTrigger = true;
 			enaSwitch = false;
+			Debug.Log ("Room Ended");
 		}
 	}
 
