@@ -14,7 +14,7 @@ public class GameOverScreen	: MonoBehaviour {
 	void Update () {
 		
 		if (Input.anyKey) {
-			Application.LoadLevel(5);
+			Application.LoadLevel(2);
 		}
 		
 	}
