@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class StatueSwitchEvent : SwitchEvent
+public class StatueSwitchEvent : SwitchEventManager
 {
 
     public GameObject[] switches;

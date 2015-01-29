@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ThrowPlayer : MonoBehaviour {
-	private int vilainCount;
-	private List<bool> playersList;
-	private List<GameObject> pusherList;
+	private List<bool> pusherList;
 	private Vector3 previousPosition;
 	private Vector3 nextPosition;
 	private int playersNbr = 4;
@@ -15,25 +13,12 @@ public class ThrowPlayer : MonoBehaviour {
 	public float speed = 10f;
 	public float deltaSynchro = 0.4f;
 
-	public List<GameObject> PusherList {
-		get {
-			return pusherList;
-		}
-	}
-
-	public void IncCount() {
-		++vilainCount;
-		Debug.Log("throwCount: " + vilainCount);
-	}
-
 	// Use this for initialization
 	void Start () {
-		pusherList = new List<GameObject>();
-		playersList = new List<bool>(playersNbr);
+		pusherList = new List<bool>(playersNbr);
 		for(int i=0; i<playersNbr; i++) {
-			playersList.Add(false);
+			pusherList.Add(false);
 		}
-		vilainCount = 0;
 		isFlying = false;
 		nextPosition = new Vector3();
 	}
@@ -51,86 +36,57 @@ public class ThrowPlayer : MonoBehaviour {
 		this.checkWellFlying ();
 	}
 
-	void OnTriggerEnter2D(Collider2D collider) {
-		if(collider.gameObject.tag != "Player")
+	void OnTriggerEnter2D(Collider2D coll) {
+		if(coll.gameObject.tag != "Player")
 			return;
 
-		if(collider.gameObject.GetComponent<Playermovement>().player == "1") {
-			if(playersList[0] == false) {
-				playersList[0] = true;
-				pusherList.Add(collider.gameObject);
-			}
-		}
-		if(collider.gameObject.GetComponent<Playermovement>().player == "2") {
-			if(playersList[1] == false) {
-				playersList[1] = true;
-				pusherList.Add(collider.gameObject);
-			}
-		}
-		if(collider.gameObject.GetComponent<Playermovement>().player == "3") {
-			if(playersList[2] == false) {
-				playersList[2] = true;
-				pusherList.Add(collider.gameObject);
-			}
-		}
-		if(collider.gameObject.GetComponent<Playermovement>().player == "4") {
-			if(playersList[3] == false) {
-				playersList[3] = true;
-				pusherList.Add(collider.gameObject);
-			}
-		}
+		coll.gameObject.GetComponent<Playermovement> ().addActionListener (this.gameObject);
 		//Debug.Log("Add to list");
 	}
 
-	void OnTriggerExit2D(Collider2D collider) {
-		if(collider.gameObject.tag != "Player")
+	void OnTriggerExit2D(Collider2D coll) {
+		if(coll.gameObject.tag != "Player")
 			return;
 
-		if(collider.gameObject.GetComponent<Playermovement>().player == "1") {
-			if(playersList[0] == true) {
-				playersList[0] = false;
-				pusherList.Remove(collider.gameObject);
-			}
-		}
-		if(collider.gameObject.GetComponent<Playermovement>().player == "2") {
-			if(playersList[1] == true) {
-				playersList[1] = false;
-				pusherList.Remove(collider.gameObject);
-			}
-		}
-		if(collider.gameObject.GetComponent<Playermovement>().player == "3") {
-			if(playersList[2] == true) {
-				playersList[2] = false;
-				pusherList.Remove(collider.gameObject);
-			}
-		}
-		if(collider.gameObject.GetComponent<Playermovement>().player == "4") {
-			if(playersList[3] == true) {
-				playersList[3] = false;
-				pusherList.Remove(collider.gameObject);
-			}
-		}
+		int playerId = coll.gameObject.GetComponent<Playermovement> ().removeActionListener (this.gameObject);
+		pusherList[playerId] = false;
 		//Debug.Log ("Remove to list");
 	}
+	
+	public void ActionAPressed (int playerId)
+	{
+		pusherList[playerId] = true;
+	}
+	
+	public void ActionBPressed (int playerId)
+	{}
 
-	void OnCollisionEnter2D(Collision2D collider) {
-		if(collider.gameObject.tag == "Hole")
+	void OnCollisionStay2D(Collision2D coll) {
+		if(!isFlying)
 			return;
+		if(coll.gameObject.tag == "Hole"
+			|| coll.gameObject.tag == "Proximity"
+			|| coll.gameObject.tag == "Player")
+			return;
+		
 		isFlying = false;
+		Debug.Log ("Tag : "+coll.gameObject.tag);
 	}
 
 	void checkWellFlying () {
 		if(!isFlying)
 			return;
-		if(previousPosition == transform.position)
+		/*if(previousPosition == transform.position)
 		{
 			isFlying = false;
-		}
+		}*/
 	}
 
 	void checkingSynchro ()
 	{
-		if(vilainCount == 0) {
+		int pushersNbr = pusherList.FindAll(x => x == true).Count;
+			//if(playersList.FindAll
+		if(pushersNbr == 0) {
 			lastSynchro = Time.fixedTime;
 			return;
 		}
@@ -139,8 +95,14 @@ public class ThrowPlayer : MonoBehaviour {
 		
 		if( delta > deltaSynchro )
 		{
-			throwPlayer(vilainCount);
-			vilainCount = 0;
+			throwPlayer(pushersNbr);
+			for(int i = 0; i < pusherList.Count; i++)
+			{
+				pusherList[i] = false;
+			}
+			pushersNbr = pusherList.FindAll(x => x == true).Count;
+			Debug.Log("pusher : "+pushersNbr);
+			pushersNbr = 0;
 			//Debug.Log ("delta : " + delta);
 			lastSynchro = Time.fixedTime;
 		}

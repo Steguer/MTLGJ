@@ -9,7 +9,6 @@ public class MovableBlockButton : MovableScript {
 	Vector2 previousPosition;
 	float lastSynchro = 0;
 	public float deltaSynchro = 0.7f;
-	private List<GameObject> interactivePlayers;
 	private List<int> pushCount;
 
 	public int neededPusher = 2;
@@ -59,12 +58,9 @@ public class MovableBlockButton : MovableScript {
 		if(coll.gameObject.tag != "Player")
 			return;
 
-		//	coll.gameObject.SendMessage("setPushing", true);
-		//interactivePlayers.Add(coll.gameObject);
 		coll.gameObject.GetComponent<Playermovement> ().addActionListener (this.gameObject);
 
 		nbrPusher++;
-		//checkNbrPusher ();
 
 		Debug.Log ("Player enter");
 	}
@@ -74,13 +70,10 @@ public class MovableBlockButton : MovableScript {
 		if(coll.gameObject.tag != "Player")
 			return;
 
-		//	coll.gameObject.SendMessage("setPushing", false);
-		//interactivePlayers.Remove(coll.gameObject);
 		coll.gameObject.GetComponent<Playermovement> ().removeActionListener (this.gameObject);
 
 		if(nbrPusher > 0)
 			nbrPusher--;
-		//checkNbrPusher ();
 		
 		Debug.Log ("Player leave");
 	}
@@ -111,19 +104,14 @@ public class MovableBlockButton : MovableScript {
 			lastSynchro = Time.fixedTime;
 		}
 	}
-	/*void checkingButton () 
-	{
-		foreach(GameObject player in interactivePlayers) {
-
-		}
-	}*/
+	
 	public void ActionAPressed (int player)
 	{
 	}
 
-	public void ActionBPressed (int player)
+	public void ActionBPressed (int playerId)
 	{
 		//Debug.Log ("Action Pressed " + player);
-		pushCount[player-1]++;
+		pushCount[playerId]++;
 	}
 }

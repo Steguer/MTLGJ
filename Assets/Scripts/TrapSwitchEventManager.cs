@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TrapSwitchEvent : SwitchEvent {
+public class TrapSwitchEventManager : SwitchEventManager {
 
     public GameObject[] trapSwitches;
     public GameObject[] traps;

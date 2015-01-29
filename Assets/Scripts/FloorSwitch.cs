@@ -7,20 +7,24 @@ public class FloorSwitch : Switch {
     public Sprite sprite1;
     public Sprite sprite2;
     bool isActive = false;
+    int nbrObject = 0;
 
-    void OnTriggerEnter2D(Collider2D collider2d) 
+    void OnTriggerEnter2D(Collider2D coll) 
     {
-        if (collider2d.gameObject.tag != "Proximity")
+        if (coll.gameObject.tag != "Proximity")
         {
             toggle(true);
+            nbrObject++;
         }
     }
 
-    void OnTriggerExit2D(Collider2D collider2d)
+    void OnTriggerExit2D(Collider2D coll)
     {
-        if (collider2d.gameObject.tag != "Proximity")
+        if (coll.gameObject.tag != "Proximity")
         {
-            toggle (false);
+            nbrObject--;
+            if(nbrObject == 0)
+            	toggle (false);
         }
     }
 
@@ -29,9 +33,15 @@ public class FloorSwitch : Switch {
 		if(isActive == activate)
 			return;
 		
+		if(parent == null) {
+			Debug.Log ("Error : FloorSwitch's parent not Set !");
+			return;
+		}
+		
 		if(activate) {
 			Debug.Log("activating FloorSwitch");
 			GetComponent<SpriteRenderer>().sprite = sprite2;
+			
 			parent.activateEvent();
 		}
 		else {

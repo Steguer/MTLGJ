@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class TimedSwitchEvent : SwitchEvent {
+public class TimedSwitchEvent : SwitchEventManager {
 
     public float simultaneousMaxActivationWindow = 30f;
     public float simultaneousActivationWindow = 0;
