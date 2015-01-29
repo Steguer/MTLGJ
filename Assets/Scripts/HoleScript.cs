@@ -17,12 +17,12 @@ public class HoleScript : MonoBehaviour {
 		if (collider.gameObject.tag == "Player") 
 		{
 			collider.gameObject.GetComponent<Playermovement> ().setFalling(true, this.transform.position);
-			Debug.Log ("Player is Falling");
+			//Debug.Log ("Player is Falling");
 		} 
 		else if( collider.gameObject.tag == "MovableBlock") 
 		{
 			collider.gameObject.GetComponent<MovableScript> ().setFalling(true, this.transform.position);
-			Debug.Log ("Collider is not the Player");
+			//Debug.Log ("Collider is not the Player");
 		}
 	}
 }

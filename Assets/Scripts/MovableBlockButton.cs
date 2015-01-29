@@ -27,6 +27,8 @@ public class MovableBlockButton : MovableScript {
             transform.localScale -= new Vector3(fallSpeed * Time.deltaTime, fallSpeed * Time.deltaTime, 0f);
             transform.position = Vector3.MoveTowards(transform.position, fallingPosition, movingTowardsTrapSpeed * Time.deltaTime);
         }
+        else if (isFalling)
+        	Destroy(this);
 
 		checkingSynchro ();
 
@@ -62,7 +64,7 @@ public class MovableBlockButton : MovableScript {
 
 		nbrPusher++;
 
-		Debug.Log ("Player enter");
+		Debug.Log ("Player enter. NbrPushers : "+nbrPusher);
 	}
 
 	void OnCollisionExit2D(Collision2D coll)

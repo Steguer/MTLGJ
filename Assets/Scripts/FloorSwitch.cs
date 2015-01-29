@@ -11,11 +11,18 @@ public class FloorSwitch : Switch {
 
     void OnTriggerEnter2D(Collider2D coll) 
     {
-        if (coll.gameObject.tag != "Proximity")
-        {
-            toggle(true);
-            nbrObject++;
-        }
+        if (coll.gameObject.tag == "Proximity"
+        	|| coll.gameObject.tag == "Wall"
+        	|| coll.gameObject.tag == "Floor")
+        	return;
+        if(coll.gameObject.tag != "Player"
+        	&& coll.gameObject.tag != "MovableBlock")
+        	return;
+        
+        Debug.Log("FloorTriggerEnter's tag : "+coll.tag);
+        	
+	    toggle(true);
+	    nbrObject++;
     }
 
     void OnTriggerExit2D(Collider2D coll)

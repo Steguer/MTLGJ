@@ -68,9 +68,25 @@ public class ThrowPlayer : MonoBehaviour {
 			|| coll.gameObject.tag == "Proximity"
 			|| coll.gameObject.tag == "Player")
 			return;
+			
+		int playerDirection = this.gameObject.GetComponent<Playermovement>().getDirection();
+		Vector3 contactNormal = coll.contacts[0].normal;
 		
+		//Debug.Log("Normal contact : "+contactNormal.x + ", "+contactNormal.y+" direction "+playerDirection);
+		
+		switch(playerDirection) {
+			case 1: case 2: 
+				if(contactNormal.y < 0.1f && contactNormal.y > -0.1f) { 
+					return; 
+				}
+				break;
+			case 3: case 4: 
+				if(contactNormal.x < 0.1f && contactNormal.x > -0.1f) {
+					return; 
+				}
+				break;
+		}
 		isFlying = false;
-		Debug.Log ("Tag : "+coll.gameObject.tag);
 	}
 
 	void checkWellFlying () {

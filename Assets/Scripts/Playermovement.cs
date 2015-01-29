@@ -6,6 +6,8 @@
  * P4 : Manette ou 8 (A)
  
  * Reset P1 : BackSpace
+ 
+ Direction : 1 : haut, 2 : bas, 3 : gauche, 4: droite
  * */
 
 
@@ -277,6 +279,16 @@ public class Playermovement : MonoBehaviour
 	{
 		GameObject.FindGameObjectWithTag ("LevelManager").GetComponent<LevelManager> ().reset ();
 		Debug.Log ("Reset !");
+	}
+	
+	public Vector3 getMovement () 
+	{
+		return this.translation;
+	}
+	
+	public int getDirection () 
+	{
+		return this.GetComponent<Animator>().GetInteger("direction");;
 	}
 }
 	
